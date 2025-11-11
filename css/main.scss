@@ -4,7 +4,7 @@
 
 body {
     overflow-x: hidden;
-background-color: #b7d3ff;
+    background-color: #b7d3ff;
 }
 
 
@@ -113,18 +113,21 @@ background-color: #b7d3ff;
 }
 
 .main_visual {
+
     background-color: #b7d3ff;
     position: relative;
     width: 100vw;
-    height: 200vh;
+    height: 150vh;
     position: relative;
-    margin-bottom: 100vh;
+    margin: 50vh 0;
+    overflow: hidden;
 
     .inner {
         width: 100%;
         height: 100vh;
         position: sticky;
         top: 0;
+        z-index: 1;
 
 
         .shad {
@@ -153,7 +156,7 @@ background-color: #b7d3ff;
         .emo {
             position: absolute;
             padding: 0.2rem;
-            background-color: #f0f5f0;
+            background-color: transparent;
             font-size: 3.5em;
             border-radius: 2rem;
             will-change: transform;
@@ -161,7 +164,8 @@ background-color: #b7d3ff;
             user-select: none;
             width: 10rem;
             height: auto;
-
+            transition: none;
+            opacity: 1;
             img {
                 width: 100%;
                 height: 100%;
@@ -178,6 +182,7 @@ background-color: #b7d3ff;
         display: flex;
         justify-content: center;
         align-items: center;
+        transform: scale(1);
 
         img {
             transform: scale(0.1);
@@ -194,10 +199,11 @@ background-color: #b7d3ff;
         display: flex;
         justify-content: center;
         align-items: flex-end; // 맨 아래에서 시작
+        z-index: 10;
 
         .info-cont {
             opacity: 0; // 처음엔 안 보임
-            transform: translateY(100px); // 아래쪽에서 시작
+            transform: translateY(5rem); // 아래쪽에서 시작
             transition: all 0.5s;
 
             h1 {
@@ -210,7 +216,7 @@ background-color: #b7d3ff;
             }
 
             .shad {
-
+                pointer-events: auto;
                 width: 100%;
                 padding: 2rem;
                 background-color: #4287f5;
@@ -220,6 +226,8 @@ background-color: #b7d3ff;
                 text-align: center;
                 font-size: 2rem;
                 transition: 0.2s;
+                cursor: pointer;
+                z-index: 20;
 
                 &:hover {
                     background-color: #ffffff;
@@ -240,32 +248,34 @@ background-color: #b7d3ff;
 
 
     .btn {
+        position: absolute;
+        top: 95rem;
+        left: 15rem;
         width: 80%;
-        margin: 0 auto;
         display: flex;
-        text-align: center;
         justify-content: space-between;
-        gap: 1rem;
-        z-index: 1;
-        position: fixed; // 화면 고정
-        bottom: 10%;
-        right: 5%;
 
-        button {
-            width: 10rem;
+        z-index: 100;
+        margin: 0 auto;
+        text-align: center;
+
+        .btn-left,
+        .btn-right {
+            width: 12rem;
             transition: 0.2s;
-            bottom: 25%;
+            bottom: -50%;
             background-color: #5b99fc;
             color: #fff;
+            padding: 2rem 2rem;
             font-size: 1.8rem;
-            border-radius: 1rem;
-            z-index: 66;
-            position: absolute;
-            top: 30%;
-            right: 20%;
+            font-weight: bold;
+            border-radius: 2rem;
+            text-align: center;
 
             &:hover {
-                background-color: #4287f5;
+                background-color: #fff;
+                color: #0284c7;
+
             }
         }
     }
@@ -276,9 +286,9 @@ background-color: #b7d3ff;
 
 /* 메인1 */
 .section-01 {
-  
+
     z-index: 509;
-    color: azure;
+    color: rgb(240, 244, 255);
     background:
         radial-gradient(120rem 70rem at 10% -10%, rgba(47, 116, 255, 0.25) 0%, rgba(47, 116, 255, 0) 60%),
         radial-gradient(100rem 70rem at 95% 110%, rgba(154, 192, 255, 0.22) 0%, rgba(154, 192, 255, 0) 60%),
@@ -319,17 +329,20 @@ background-color: #b7d3ff;
                 font-size: 5rem;
                 line-height: 1.2;
                 margin-bottom: 7rem;
+                font-weight: bold;
+                letter-spacing: 0.2rem;
             }
 
             p {
-                font-size: 3rem;
+                font-size: 2.4rem;
+                line-height: 1.7;
 
                 span {
                     font-weight: bold;
-                    font-size: 2.4rem;
+                    font-size: 3rem;
                 }
 
-                margin-bottom: 10rem;
+                margin-bottom: 7rem;
             }
 
             .highlight {
@@ -387,18 +400,20 @@ background-color: #b7d3ff;
 
 
         &:hover {
+            background-color: #9f95cc77;
+
             h2 {
                 -webkit-text-stroke: 0.2rem 000;
                 -webkit-text-fill-color: #eaf7ba;
             }
 
             p {
-                color: #dbf3ff;
+                color: #3b94c0;
 
                 span {
                     background-color: #eaf7ba;
                     border-radius: 1rem;
-                    color: #7789e3;
+                    color: #11004e;
                     font-weight: bold;
                     padding: 0.5rem 2rem;
                 }
@@ -480,6 +495,7 @@ background-color: #b7d3ff;
         margin: 0 auto;
 
         #design {
+
             width: 100%;
             grid-column: 1;
             grid-row: 1;
@@ -496,7 +512,7 @@ background-color: #b7d3ff;
 
                 .contact {
                     display: flex;
-                    color: #fff;
+                    color: #11004e;
                     flex-direction: column;
                     gap: 2rem;
 
@@ -559,6 +575,7 @@ background-color: #b7d3ff;
         }
 
         #tech {
+
             .icon {
                 margin: 0 5rem 3rem 0;
             }
@@ -590,7 +607,7 @@ background-color: #b7d3ff;
                     gap: 1rem;
                     flex-wrap: wrap;
                     font-size: 1.8rem;
-                    color: #fff;
+                    color: #11004e;
                     margin-bottom: 2rem;
 
                     li.mov {
@@ -664,7 +681,8 @@ background-color: #b7d3ff;
                     gap: 1rem;
                     flex-wrap: wrap;
                     font-size: 1.8rem;
-                    color: #fff;
+                    color: #11004e;
+                    ;
 
                     .mov {
                         line-height: 1.5;
@@ -708,13 +726,14 @@ background-color: #b7d3ff;
         .item {
             width: 80%;
             margin: 0 auto;
-            color: #fff;
+            color: #11004e;
             display: flex;
             flex-direction: column;
 
             h2 {
                 font-size: 3rem;
                 margin-bottom: 2rem;
+                font-weight: bold;
 
 
             }
@@ -790,7 +809,7 @@ background-color: #b7d3ff;
         /* 절대 위치로 설정하여 다른 요소와 겹치지 않게 함 */
         top: 0;
         /* 상단에 고정 */
-        left: -20%;
+        left: -18%;
         /* 좌측에 맞춰서 고정 */
         right: 0;
         /* 우측도 맞춰서 고정 */
@@ -923,7 +942,7 @@ background-color: #b7d3ff;
 /* 메인3 */
 
 .section-03 {
-   
+
 
     section {
         height: 100vh;
@@ -948,8 +967,8 @@ background-color: #b7d3ff;
 
             span {
                 display: block;
-                -webkit-text-stroke: 0.2rem #f45b409f; // 2px
-                -webkit-text-fill-color: #feda84d6;
+                -webkit-text-stroke: 0.4rem #000000; // 2px
+                -webkit-text-fill-color: #eaf7ba;
                 color: transparent;
             }
         }
@@ -1022,7 +1041,7 @@ background-color: #b7d3ff;
 
 
     section {
-        height: 80%;
+        height: 45%;
         width: 80%;
         position: sticky;
         top: 0;
@@ -1050,131 +1069,206 @@ background-color: #b7d3ff;
 
 }
 
-/* 메인5 */
+/* 미디어쿼리 */
+
+@media (min-width: 768px) {
+    .swiper-slide {
+        width: 48%;
+    }
+
+    // 태블릿 2개
+}
+
+@media (min-width: 1024px) {
+    .swiper-slide {
+        width: 32%;
+    }
+
+    // PC 3개
+}
+
+
+/* 메인5 - section-05 */
 .section-05 {
-    * {
-        margin: 0;
-    }
-
-    *,
-    *::before,
-    *::after {
-        box-sizing: border-box;
-    }
-
+    width: 100%;
+    min-height: 100vh;
+    padding: 4rem 1.6rem;
     background-color: #f5f5f5;
     color: #1a1a1a;
+    margin-bottom: 50rem;
+    border-radius: 0 0 5rem 5rem;
 
-    .wrapper {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-    }
-
-    .section {
-        width: 100%;
-        max-width: 94rem;
-        padding: 4rem 1.6rem;
+    .section-title {
+        font-size: 12rem;
+        font-weight: 700;
+        margin-bottom: 2rem;
         text-align: center;
     }
 
-    .section-title {
-        font-size: 1.8rem;
-        line-height: 1.2;
-        font-weight: 700;
-        margin-bottom: 0.8rem;
-    }
-
     .section-desc {
+        font-size: 2rem;
         color: #555;
-        font-size: 1rem;
-        line-height: 1.5;
+        text-align: center;
         margin-bottom: 4rem;
     }
 
-    .swiper {
-        overflow: visible;
+    .card-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-auto-rows: auto;
+        gap: 2rem;
+        justify-items: center;
 
-        .swiper-wrapper {
-            display: flex;
-            gap: 2rem;
+
+        .card-wrapper {
+            width: 100%;
+            max-width: 30rem;
+            position: relative;
+            margin-bottom: 5rem;
+
+            .card-circle {
+                width: 6rem;
+                height: 6rem;
+                background-color: #fff;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-weight: 700;
+                font-size: 1.5rem;
+                position: absolute;
+                top: -6rem;
+                z-index: 5;
+                left: 50%;
+                transform: translateX(-50%);
+                box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.1); // 2px 4px
+
+                img {
+                    width: 100%;
+                    object-fit: contain;
+                    border-radius: 50%;
+                }
+            }
+
+            .card {
+                background-color: #fff;
+                border-radius: 2rem;
+                padding: 3rem 2rem 2rem;
+
+                box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.1);
+
+                h3 {
+                    text-align: center;
+                    font-size: 2rem;
+                    font-weight: bold;
+
+                    p {
+                        font-size: 1.8rem;
+                        text-align: left;
+                        padding: 0 5rem;
+
+
+                    }
+                }
+
+                .card-title {
+                    font-size: 1.8rem;
+                    font-weight: 700;
+                    margin-bottom: 1rem;
+                }
+
+                .card-desc {
+                    font-size: 1.4rem;
+                    color: #666;
+                    margin-bottom: 2rem;
+                }
+
+                .card-figure {
+                    width: 100%;
+                    height: 20rem;
+                    border-radius: 1.5rem;
+                    overflow: hidden;
+                    background-color: #ffd270;
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+                }
+            }
+        }
+    }
+
+    @media (max-width: 1024px) {
+        .card-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .card-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+}
+
+.topbtn {
+    display: none;
+    position: fixed;
+    bottom: 5rem;
+    right: 5rem;
+    z-index: 999;
+   
+    a {
+        font-family: 'Cafe24MeongiWhite', sans-serif;
+        color: #fff;
+        display: block;
+        width: 8rem;
+
+        em {
+            position: absolute;
+            top: 60%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+            font-weight: bold;
         }
 
-        .swiper-slide {
-            flex-shrink: 0;
-            width: auto;
+        img {
+            width: 100%;
+            object-fit: cover;
+            position: relative;
         }
     }
+}
 
-    .card-wrapper {
-        position: relative;
-    }
+.footer {
+    width: 100%;
+    height: 50rem;
+    position: fixed;
+    z-index: -1;
 
-    .card {
-        --r: 3rem;
-        --s: 4rem;
-        background-color: #fff;
-        padding: 2.4rem;
-        width: 100%;
-        text-align: left;
-        border-radius: 3rem;
-        clip-path: polygon(0% 0%,
-                calc(100% - var(--s) - var(--r)) 0%,
-                100% var(--r),
-                100% calc(100% - var(--r)),
-                calc(100% - var(--r)) 100%,
-                0% 100%);
-    }
-
-    .card-circle {
-        width: 6rem;
-        height: 6rem;
-        background-color: #fff;
-        position: absolute;
-        top: 0;
-        right: 0;
-        border-radius: 50%;
-        font-size: 1.5rem;
+    .container {
+        order: 1;
         display: flex;
-        justify-content: center;
-        align-items: center;
-        font-weight: 700;
-    }
-
-    .card-title {
-        font-size: 1.2rem;
-        font-weight: 700;
-        margin-bottom: 1rem;
-        padding-right: 7rem;
-    }
-
-    .card-desc {
-        font-size: 0.875rem;
-        line-height: 1.5;
-        color: #666;
-        margin-bottom: 1.2rem;
-        padding-right: 6.5rem;
-    }
-
-    .card-figure {
-        height: 20rem;
-        background-color: #eee;
-        border-radius: 2rem;
-        position: relative;
+        gap: 1rem;
         overflow: hidden;
+        background-color: rgb(147, 185, 255);
     }
 
-    .card-img {
-        height: 100%;
-        position: absolute;
-        width: 100%;
-        inset: 0;
-        object-fit: cover;
+    h3 {
+
+        white-space: nowrap;
+        font-family: 'Cafe24MeongiWhite', sans-serif;
+        animation: marquee 25s linear infinite;
+        font-size: 5rem;
     }
 
-    .swiper-pagination {
-        position: static;
-        margin-top: 2.4rem;
+}
+
+@keyframes marquee {
+    to {
+        transform: translateX(-100%);
     }
 }

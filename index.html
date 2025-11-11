@@ -5,10 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>main</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.css" />
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
     <link rel="stylesheet" href="css/main.scss">
     <link rel="stylesheet" href="css/main.css">
+
+
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
@@ -18,9 +22,8 @@
     <script src="lib/SplitText.min.js"></script>
     <script src="lib/ScrollToPlugin.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@latest/bundled/lenis.min.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"></script>
-
-
     <script>
         $(function () {
             AOS.init();
@@ -122,12 +125,12 @@
                 gsap.from(emoji, {
                     scrollTrigger: {
                         trigger: ".main_visual",
-                        start: "top top",
+                        start: "top bottom",
                         end: "bottom top",
                         scrub: 1
                     },
                     x: "47vw",
-                    y: "40vh",
+                    y: "50vh",
                     rotate: 0
                 });
             });
@@ -137,9 +140,10 @@
                 $(".emo").each(function () {
                     const bound = parseFloat($(this).attr("data-bound")) || 20;
                     gsap.to($(this), {
-                        xPercent: map(e.pageX, 0, window.innerWidth, -bound, bound),
-                        yPercent: map(e.pageY, 0, window.innerHeight, -bound, bound),
+                        xPercent: map(e.pageX, 5, window.innerWidth, -bound, bound),
+                        yPercent: map(e.pageY, 50, window.innerHeight, -bound, bound),
                         duration: 0.1
+                        
                     });
                 });
             });
@@ -311,24 +315,56 @@
 
 
             //메인5
+            $(document).ready(function () {
+                $('.card-img').hover(
+                    function () {
+                        $(this).css({
+                            'transform': 'scale(2)',
+                            'transition': 'transform 0.3s ease',
+                            'z-index': '10',
+                            'position': 'relative'
+                        });
+                    },
+                    function () {
+                        $(this).css({
 
-            let swiper = new Swiper(".steps", {
-                slidesPerView: 1, // 모바일 1개
-                spaceBetween: 20,
-                autoHeight: true,
-                pagination: {
-                    el: ".swiper-pagination",
-                    clickable: true
-                },
-                breakpoints: {
-                    768: { slidesPerView: 2 },  // 태블릿: 2개
-                    1024: { slidesPerView: 3 }  // PC: 3개
+                            'transform': 'scale(1)',
+                            'transition': 'transform 0.3s ease',
+                            'z-index': '1',
+                            'position': 'relative'
+                        });
+                    }
+                );
+            });
+
+            //탑버튼
+
+
+
+
+         
+            $(window).on("scroll", function () {
+                if ($(this).scrollTop() > 200) {
+                    $("#topbtn").fadeIn(300); 
+                } else {
+                    $("#topbtn").fadeOut(300); 
                 }
             });
+
+            // 클릭 시 부드럽게 맨 위로
+            $("#topbtn").on("click", function () {
+                $("html, body").animate({ scrollTop: 0 }, 800, "swing");
+                
+            });
+
+
+
+
 
         });//script end
     </script>
 </head>
+
 
 
 <body>
@@ -369,39 +405,45 @@
                 <div class="inner">
 
                     <div class="emo shad" data-x='10vw' data-y='50vh' data-rotate='-40' data-bound='40' data-z='50'>
-                        <img src="img/me.jpg" alt="">
+                        <img src="img/main_1.png" alt="메인">
                     </div>
                     <div class="emo shad" data-x='20vw' data-y='70vh' data-rotate='-30' data-bound='50' data-z='40'>
-                        💎
+                        <img src="img/main_2.png" alt="메인">
                     </div>
                     <div class="emo shad" data-x='60vw' data-y='20vh' data-rotate='10' data-bound='30' data-z='20'>
-                        🎁
+                        <img src="img/main_11.png" alt="메인">
                     </div>
                     <div class="emo shad" data-x='70vw' data-y='70vh' data-rotate='10' data-bound='20'>
-                        🧸
+                        <img src="img/main_3.png" alt="메인">
                     </div>
                     <div class="emo shad" data-x='30vw' data-y='20vh' data-rotate='-12' data-bound='30' data-z='30'>
-                        ❤️‍🩹
+                        <img src="img/main_5.png" alt="메인">
                     </div>
                     <div class="emo shad" data-x='75vw' data-y='50vh' data-rotate='20' data-bound='50'>
-                        😎
+                        <img src="img/main_6.png" alt="메인">
                     </div>
                     <div class="emo shad" data-x='10vw' data-y='10vh' data-rotate='-20' data-bound='50' data-z='60'>
-                        📍
+                        <img src="img/main_7.png" alt="메인">
                     </div>
                     <div class="emo shad" data-x='30vw' data-y='60vh' data-rotate='-5' data-bound='10'>
-                        🥤
+                        <img src="img/main_8.png" alt="메인">
+                    </div>
+                    <div class="emo shad" data-x='20vw' data-y='10vh' data-rotate='10' data-bound='70' data-z='90'>
+                        <img src="img/main_9.png" alt="메인">
                     </div>
                     <div class="emo shad" data-x='80vw' data-y='10vh' data-rotate='10' data-bound='70' data-z='90'>
-                        👻
+                        <img src="img/main_10.png" alt="메인">
+                    </div>
+                    <div class="emo shad" data-x='100vw' data-y='10vh' data-rotate='10' data-bound='70' data-z='90'>
+                        <img src="img/main_4.png" alt="메인">
                     </div>
                 </div><!-- .inner end -->
 
 
 
                 <div class="btn">
-                    <button type="button">Project</button>
-                    <button type="button">Contact</button>
+                    <a href="#section-03" class="btn-left">Project</a>
+                    <a href="#section-05" class="btn-right">Contact</a>
                 </div><!-- .btn end -->
 
 
@@ -444,7 +486,8 @@
                     <div class="text">
                         <h2>Connecting the Dots:<br /> From Structure to Experience</h2>
                         <p>
-                            <span>'점'</span> 하나하나가 모여 선을 이루고, 그 선이 이어져 하나의 화면이 됩니다.<br /> 퍼블리싱은 그 <span>‘연결의
+                            <span>'점'</span> 하나하나가 모여 <span>'선'</span>을 이루고, 그 선이 이어져 하나의 <span>'화면'</span>이 됩니다.<br />
+                            퍼블리싱은 그 <span>‘연결의
                                 과정’</span>입니다.<br>
                             단순한 연결 속에서 기술은 경험이 되고, 감성은 구조 속에서 완성됩니다. <br /> 그리고 그 모든 흐름 안에는 저의 <span>시간</span>이
                             있습니다.<br>
@@ -622,6 +665,10 @@
 
             </section><!-- section-03 end -->
 
+
+
+            <!-- 메인4 -->
+
             <section class="section-04" id="section-04">
 
                 <div class="div-inner-1">
@@ -651,74 +698,125 @@
             </section><!-- section-04 end -->
 
 
-            <section class="section-05" id="section-05"><!-- section-05  -->
+
+
+            <!-- 메인5 -->
+
+
+            <section class="section-05" id="section-05">
                 <div class="wrapper">
                     <div class="section">
-                        <h2 class="section-title">
-                            GRAPHIC DESIGN
-                        </h2><!-- section-title end -->
+                        <h2 class="section-title">GRAPHIC DESIGN</h2>
                         <p class="section-desc">
-                           A Collection of Works in Branding, Editorial, and Digital Design
+                            A Collection of Works in Branding, Editorial, and Digital Design
                         </p><!-- section-desc end -->
-                        <div class="swiper steps">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <article class="card-wrapper">
-                                        <div class="card-circle">1</div><!-- card-circle end -->
-                                        <div class="card">
-                                            <h3 class="card-title">Plan Ahead</h3><!-- card-title end -->
-                                            <p class="card-desc">
-                                                Write down 3 key tasks you want to accomplish today before checking your
-                                                phone.
-                                            </p><!-- card-desc end -->
-                                            <figure class="card-figure">
-                                                <img class="card-img"
-                                                    src="https://arman-borkhani.github.io/codepen-cpc-css-shape/assets/plan.jpg"
-                                                    alt="" /><!-- card-img end -->
-                                            </figure><!-- card-figure end -->
-                                        </div><!-- card end -->
-                                    </article><!-- card-wrapper end -->
-                                </div><!-- swiper-slide end -->
-                                <div class="swiper-slide">
-                                    <article class="card-wrapper">
-                                        <div class="card-circle">2</div><!-- card-circle end -->
-                                        <div class="card">
-                                            <h3 class="card-title">Get Moving</h3><!-- card-title end -->
-                                            <p class="card-desc">
-                                                Do a short workout, stretch, or walk to activate your energy and improve
-                                                your focus.
-                                            </p><!-- card-desc end -->
-                                            <figure class="card-figure">
-                                                <img class="card-img"
-                                                    src="https://arman-borkhani.github.io/codepen-cpc-css-shape/assets/moving.jpg"
-                                                    alt="" /><!-- card-img end -->
-                                            </figure><!-- card-figure end -->
-                                        </div><!-- card end -->
-                                    </article><!-- card-wrapper end -->
-                                </div><!-- swiper-slide end -->
-                                <div class="swiper-slide">
-                                    <article class="card-wrapper">
-                                        <div class="card-circle">3</div><!-- card-circle end -->
-                                        <div class="card">
-                                            <h3 class="card-title">Find Calm</h3><!-- card-title end -->
-                                            <p class="card-desc">
-                                                Spend a few quiet minutes meditating, journaling, or just breathing
-                                                mindfully before diving into work.
-                                            </p><!-- card-desc end -->
-                                            <figure class="card-figure">
-                                                <img class="card-img"
-                                                    src="https://arman-borkhani.github.io/codepen-cpc-css-shape/assets/calm.jpg"
-                                                    alt="" /><!-- card-img end -->
-                                            </figure><!-- card-figure end -->
-                                        </div><!-- card end -->
-                                    </article><!-- card-wrapper end -->
-                                </div><!-- swiper-slide end -->
-                            </div><!-- swiper-wrapper end -->
-                            <div class="swiper-pagination"></div><!-- swiper-pagination end -->
-                        </div><!-- swiper steps end -->
+
+                        <div class="card-grid">
+                            <!-- 카드 1 -->
+                            <div class="card-wrapper">
+                                <div class="card-circle"><img src="img/ai.svg" alt="일러스트" /></div>
+                                <div class="card"><!-- card end -->
+                                    <h3 class="card-title">청년아 모여라</h3>
+                                    <p class="card-desc">
+                                        일러스트 3D툴로 만든 청년포스터를 제작하였습니다.
+                                    </p>
+                                    <figure class="card-figure">
+                                        <img class="card-img" src="img/포스터.jpg" alt="일러스트" /><!-- card-img end -->
+                                    </figure><!-- card-figure end -->
+                                </div><!-- card end -->
+                            </div><!-- card-wrapper end -->
+
+                            <!-- 카드 2 -->
+                            <div class="card-wrapper">
+                                <div class="card-circle"><img src="img/photo.svg" alt="포토샵" /></div>
+                                <div class="card">
+                                    <h3 class="card-title">헬로우 슬립</h3><!-- card-title end -->
+                                    <p class="card-desc">
+                                        포토샵을 활용한 움직이는 gif 포스터를 제작하였습니다.
+                                    </p><!-- card-desc end -->
+                                    <figure class="card-figure"><!-- card-figure end -->
+                                        <img class="card-img" src="img/헬로우슬립.gif" alt="헬로우슬립" /><!-- card-img end -->
+                                    </figure><!-- card-figure end -->
+                                </div><!-- card end -->
+                            </div><!-- card-wrapper end -->
+
+                            <!-- 카드 3 -->
+                            <div class="card-wrapper">
+                                <div class="card-circle"><img src="img/ai.png" alt="일러스트"></div>
+                                <div class="card"><!-- card end -->
+                                    <h3 class="card-title">Find Calm</h3>
+                                    <p class="card-desc">
+                                        Spend a few quiet minutes meditating, journaling, or just breathing
+                                        mindfully before diving into work.
+                                    </p>
+                                    <figure class="card-figure">
+                                        <img class="card-img"
+                                            src="https://arman-borkhani.github.io/codepen-cpc-css-shape/assets/calm.jpg"
+                                            alt="" />
+                                    </figure><!-- card-figure end -->
+                                </div><!-- card end -->
+                            </div><!-- card-wrapper end -->
+
+                            <!-- 카드 4 -->
+                            <div class="card-wrapper">
+                                <div class="card-circle">4</div>
+                                <div class="card">
+                                    <h3 class="card-title">Another Task</h3>
+                                    <p class="card-desc">Description for the fourth card.</p>
+                                    <figure class="card-figure">
+                                        <img class="card-img" src="img/sample4.jpg" alt="" />
+                                    </figure><!-- card-figure end -->
+                                </div><!-- card end -->
+                            </div><!-- card-wrapper end -->
+
+                            <!-- 카드 5 -->
+                            <div class="card-wrapper">
+                                <div class="card-circle">5</div>
+                                <div class="card">
+                                    <h3 class="card-title">Another Task</h3>
+                                    <p class="card-desc">Description for the fifth card.</p>
+                                    <figure class="card-figure">
+                                        <img class="card-img" src="img/sample5.jpg" alt="" />
+                                    </figure><!-- card-figure end -->
+                                </div><!-- card end -->
+                            </div><!-- card-wrapper end -->
+
+                            <!-- 카드 6 -->
+                            <div class="card-wrapper">
+                                <div class="card-circle">6</div>
+                                <div class="card">
+                                    <h3 class="card-title">Another Task</h3>
+                                    <p class="card-desc">Description for the sixth card.</p>
+                                    <figure class="card-figure">
+                                        <img class="card-img" src="img/sample6.jpg" alt="" />
+                                    </figure><!-- card-figure end -->
+                                </div><!-- card end -->
+                            </div><!-- card-wrapper end -->
+
+                        </div><!-- card-grid end -->
                     </div><!-- section end -->
                 </div><!-- wrapper end -->
             </section><!-- section-05 end -->
+
+
+            <div class="topbtn" id="topbtn">
+                <a href="#"><img src="img/top.svg" alt="top"><em>top</em></a>
+            </div><!-- topbtn end -->
+
+
+            <footer class="footer">
+                <div class="container">
+                    <h3>contact me contact me contact me contact me contact me contact me contact me contact me contact
+                        me contact me contact me contact me contact me contact me contact me contact me contact me
+                        contact me contact me contact me contact me contact me contact me contact me contact me contact
+                        me contact me contact me contact me </h3>
+                    <h3>contact me contact me contact me contact me contact me contact me contact me contact me contact
+                        me contact me contact me contact me contact me contact me contact me contact me contact me
+                        contact me contact me contact me contact me contact me contact me contact me contact me contact
+                        me contact me contact me contact me </h3>
+
+                </div><!-- container -->
+            </footer><!-- footer end -->
 
         </main><!-- .main end -->
 
