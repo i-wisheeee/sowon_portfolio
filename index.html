@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>main</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+    <link rel="stylesheet" href="css/main.scss">
+    <link rel="stylesheet" href="css/main.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.3/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.3/ScrollTrigger.min.js"></script>
+    <script src="lib/SplitText.min.js"></script>
+    <script src="lib/ScrollToPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@latest/bundled/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"></script>
+
+
+    <script>
+        $(function () {
+            AOS.init();
+            gsap.registerPlugin(ScrollTrigger);
+
+            $(".menu-btn").on("click", function () {
+                $("#nav").toggle();  // 메뉴 보이기/숨기기
+            });
+
+
+            $("#nav a").on("mousemove", function (e) {
+                const rect = this.getBoundingClientRect();
+                const $img = $(this).find("img");
+
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                $img.css({
+                    left: `${x}px`,
+                    top: `${y}px`
+                });
+            });
+
+            // 배경 클릭 시 메뉴 닫기
+            $(document).on("click", function (e) {
+                // 메뉴나 메뉴 버튼 외부를 클릭했을 때 메뉴를 닫는다.
+                if (!$(e.target).closest("#nav, .menu-btn").length) {
+                    $("#nav").hide();  // 메뉴 숨기기
+                }
+            });
+
+            // 메뉴 버튼 클릭 시 메뉴가 열릴 때 배경 클릭을 무시하도록
+            $(".menu-btn").on("click", function (e) {
+                e.stopPropagation();  // 메뉴 버튼 클릭 이벤트가 문서로 전파되지 않도록 막기
+            });
+
+
+
+
+            const $nav = $("#nav");
+
+            // 각 a 태그에 대해 mousemove 이벤트 설정
+            $nav.find("a").on("mousemove", function (e) {
+                const rect = this.getBoundingClientRect();
+                const $img = $(this).find("img");
+
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                $img.css({
+                    left: `${x}px`,
+                    top: `${y}px`
+                });
+            });
+
+            // 윈도우 전체 mousemove 이벤트
+            $(window).on("mousemove", function (e) {
+                const percent = e.clientY / window.innerHeight;
+
+                // nav 움직이기 (CSS 애니메이션 대신 jQuery animate 사용)
+                $nav.stop().animate(
+                    {
+                        // transform은 jQuery animate에서 직접 제어 불가 → CSS 변수나 jQuery css()로 처리
+                    },
+                    {
+                        duration: 4000,
+                        step: function () {
+                            const translateY = percent * $nav.outerHeight() * -1;
+                            $nav.css("transform", `translateY(${translateY}px)`);
+                        },
+                        queue: false
+                    }
+                );
+            });
+
+
+
+            //메인비주얼
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Lenis 스크롤
+            const lenis = new Lenis();
+            lenis.on("scroll", ScrollTrigger.update);
+            gsap.ticker.add((time) => lenis.raf(time * 1000));
+            gsap.ticker.lagSmoothing(0);
+
+            // 초기 emoji 위치
+            $(".emo").each(function () {
+                gsap.set($(this), {
+                    x: $(this).attr("data-x"),
+                    y: $(this).attr("data-y"),
+                    rotate: $(this).attr("data-rotate"),
+                    zIndex: $(this).attr("data-z") || 1
+                });
+            });
+
+            // emoji 스크롤 애니메이션
+            gsap.utils.toArray(".emo").forEach((emoji) => {
+                gsap.from(emoji, {
+                    scrollTrigger: {
+                        trigger: ".main_visual",
+                        start: "top top",
+                        end: "bottom top",
+                        scrub: 1
+                    },
+                    x: "47vw",
+                    y: "40vh",
+                    rotate: 0
+                });
+            });
+
+            // 마우스 따라다니는 emoji
+            $(document).mousemove(function (e) {
+                $(".emo").each(function () {
+                    const bound = parseFloat($(this).attr("data-bound")) || 20;
+                    gsap.to($(this), {
+                        xPercent: map(e.pageX, 0, window.innerWidth, -bound, bound),
+                        yPercent: map(e.pageY, 0, window.innerHeight, -bound, bound),
+                        duration: 0.1
+                    });
+                });
+            });
+
+            // 버튼 hover 효과
+            $("button").hover(
+                function () {
+                    gsap.to(".hover-btn", { y: "60%", duration: 0.1 });
+                    gsap.to("h1", { color: "#5b99fc" });
+                },
+                function () {
+                    gsap.to(".hover-btn", { y: "-100%", duration: 0.2 });
+                    gsap.to("h1", { color: "#4287f5" });
+                }
+            );
+
+            // info-cont 등장
+            gsap.registerPlugin(ScrollTrigger);
+
+            gsap.fromTo(
+                ".info-cont",
+                { autoAlpha: 0, y: 50 }, // 초기 상태: 안 보이고 아래쪽에 위치
+                {
+                    autoAlpha: 1,  // 등장하면서 보이게
+                    y: 0,          // 원래 위치로 이동
+                    duration: 1,
+                    scrollTrigger: {
+                        trigger: ".main_visual", // 스크롤 감지 영역
+                        start: "top 40%",        // 화면 중간쯤에서 등장
+                        toggleActions: "play none none reverse" // 스크롤 올리면 다시 사라짐
+                    }
+                }
+            );
+
+
+            gsap.from(".info-cont", {
+                opacity: 1,
+                y: 50,
+                duration: 1,
+                scrollTrigger: {
+                    trigger: ".main_visual",
+                    start: "bottom 0",
+                    end: "top 30%",
+                    scrub: 1
+                }
+            });
+            // map 함수
+            function map(value, inMin, inMax, outMin, outMax) {
+                return ((value - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
+            }
+
+
+            //메인1
+
+            // 카드 등장 애니메이션
+            $(".card").each(function (index, element) {
+                gsap.to(element, {
+                    scrollTrigger: {
+                        trigger: ".wrap",
+                        start: "top 75%",
+                        toggleActions: "play none none reverse"
+                    },
+                    y: 0,
+                    scale: 1.1,
+                    opacity: 1,
+                    duration: 0.9,
+                    ease: "power3.out",
+                    stagger: 0.18
+                });
+            });
+
+            // result 등장 애니메이션
+            $(".result").each(function (index, element) {
+                gsap.to(element, {
+                    scrollTrigger: {
+                        trigger: element,
+                        start: "top 80%",
+                        toggleActions: "play none none reverse"
+                    },
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.8,
+                    ease: "power3.out"
+                });
+            });
+
+            // 스킬
+
+            const $root = $(':root');
+            const $marqueeContent = $('.section-02 ul.marquee-content');
+            const displayed = parseInt($root.css('--marquee-elements-displayed'));
+
+            // 요소 개수 설정
+            $root.css('--marquee-elements', $marqueeContent.children().length);
+
+            // 복제 작업을 한 번에 처리
+            const clones = $marqueeContent.children().slice(0, displayed).clone();
+
+
+            //메인3
+
+            //section-03 
+
+            // 01. Circle animation
+            gsap.timeline({
+                scrollTrigger: {
+                    trigger: '.con02',
+                    start: 'top center',
+                    end: 'bottom top',
+                    scrub: 1,
+                    // markers: true
+                }
+            })
+                .fromTo('.circle',
+                    { width: 0, height: 0, top: '3%', ease: 'elastic.out(1, 0.3)' },
+                    { width: 2500, height: 2500, top: '40%' },
+                    0
+                );
+
+            // 02. Text box animation
+            gsap.timeline({
+                scrollTrigger: {
+                    trigger: '.con02 .text_box',
+                    start: 'top 80%',
+                    end: 'bottom 60%',
+                    scrub: 1,
+                }
+            })
+                .fromTo('.text_box',
+                    { top: '50%', opacity: 0, ease: 'power2.out' },
+                    { top: '40%', opacity: 1 },
+                    0
+                );
+
+
+            //메인4
+            gsap.registerPlugin(ScrollTrigger);
+
+            const lenis2 = new Lenis();
+
+            lenis2.on("scroll", ScrollTrigger.update);
+
+            gsap.ticker.add((time) => {
+                lenis2.raf(time * 1000);
+            });
+
+            gsap.ticker.lagSmoothing(0);
+
+            // div-inner-1~4만 선택해서 애니메이션 적용
+            $(".div-inner-1, .div-inner-2, .div-inner-3, .div-inner-4").each(function () {
+                let tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: this,             // 현재 div를 트리거로 사용
+                        start: "center top",       // 화면 중앙과 div 상단이 만나는 지점
+                        end: "center+=100% top",   // 스크롤 끝 위치
+                        scrub: 1,
+                        pin: true
+                    }
+                });
+
+                // div 안에 있는 section만 애니메이션
+                tl.to($(this).children("section"), {
+                    scale: 0.5,
+                    opacity: 0,
+                    rotate: -10,
+                    filter: "blur(20px) grayscale(100%)",
+                });
+            });
+
+
+            //메인5
+
+            let swiper = new Swiper(".steps", {
+                slidesPerView: 1, // 모바일 1개
+                spaceBetween: 20,
+                autoHeight: true,
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true
+                },
+                breakpoints: {
+                    768: { slidesPerView: 2 },  // 태블릿: 2개
+                    1024: { slidesPerView: 3 }  // PC: 3개
+                }
+            });
+
+        });//script end
+    </script>
+</head>
+
+
+<body>
+    <div id="wrap">
+
+        <main class="main">
+            <header class="header">
+                <button class="menu-btn">Menu</button>
+                <nav id="nav">
+                    <a href="#main_visual">
+                        <span>MAIN</span>
+                        <img src="img/main4.jpg" />
+                    </a>
+                    <a href="#section-02">
+                        <span>ABOUT <em>김소원</em></span>
+                        <img src="img/sowon.jpg" />
+                    </a>
+                    <a href="#section-03">
+                        <span>PROJECT</span>
+                        <img src="img/" />
+                    </a>
+                    <a href="#section-05">
+                        <span>GRAPHIC DESIGN</span>
+                        <img src="img/" />
+                    </a>
+                    <a href="#">
+                        <span>CONTACT</span>
+                        <img src="img/" />
+                    </a>
+
+                </nav>
+
+
+            </header><!-- header end -->
+
+
+            <section class="main_visual">
+                <div class="inner">
+
+                    <div class="emo shad" data-x='10vw' data-y='50vh' data-rotate='-40' data-bound='40' data-z='50'>
+                        <img src="img/me.jpg" alt="">
+                    </div>
+                    <div class="emo shad" data-x='20vw' data-y='70vh' data-rotate='-30' data-bound='50' data-z='40'>
+                        💎
+                    </div>
+                    <div class="emo shad" data-x='60vw' data-y='20vh' data-rotate='10' data-bound='30' data-z='20'>
+                        🎁
+                    </div>
+                    <div class="emo shad" data-x='70vw' data-y='70vh' data-rotate='10' data-bound='20'>
+                        🧸
+                    </div>
+                    <div class="emo shad" data-x='30vw' data-y='20vh' data-rotate='-12' data-bound='30' data-z='30'>
+                        ❤️‍🩹
+                    </div>
+                    <div class="emo shad" data-x='75vw' data-y='50vh' data-rotate='20' data-bound='50'>
+                        😎
+                    </div>
+                    <div class="emo shad" data-x='10vw' data-y='10vh' data-rotate='-20' data-bound='50' data-z='60'>
+                        📍
+                    </div>
+                    <div class="emo shad" data-x='30vw' data-y='60vh' data-rotate='-5' data-bound='10'>
+                        🥤
+                    </div>
+                    <div class="emo shad" data-x='80vw' data-y='10vh' data-rotate='10' data-bound='70' data-z='90'>
+                        👻
+                    </div>
+                </div><!-- .inner end -->
+
+
+
+                <div class="btn">
+                    <button type="button">Project</button>
+                    <button type="button">Contact</button>
+                </div><!-- .btn end -->
+
+
+                <div class="scroll-img">
+                    <img src="https://uploads-ssl.webflow.com/5cff83ac2044e22cb8cf2f11/5d00043816a6c695bcf1581a_scroll.gif"
+                        alt="">
+                </div><!-- scroll-img -->
+
+                <div class="info-wrap">
+                    <div class="info-cont">
+                        <h1>Connecting</h1>
+                        <br>
+                        <h1>the Dots</h1>
+                        <br>
+                        <br>
+                        <div class="shad">
+                            <a href="#section-01">About me</a>
+                        </div><!-- .shad end -->
+                    </div><!-- nfo-cont -->
+                </div><!-- nfo-wrap -->
+                <div class="scroll-img">
+                    <img src="https://uploads-ssl.webflow.com/5cff83ac2044e22cb8cf2f11/5d00043816a6c695bcf1581a_scroll.gif"
+                        alt="마우스스크롤">
+                </div><!-- scroll-img -->
+            </section><!-- main_visual end -->
+
+
+
+
+
+
+
+            <section class="section-01" id="section-01" data-aos="zoom-in" data-aos-delay="400">
+
+                <div class="grain"></div>
+
+
+                <div class="card-cover">
+
+                    <div class="text">
+                        <h2>Connecting the Dots:<br /> From Structure to Experience</h2>
+                        <p>
+                            <span>'점'</span> 하나하나가 모여 선을 이루고, 그 선이 이어져 하나의 화면이 됩니다.<br /> 퍼블리싱은 그 <span>‘연결의
+                                과정’</span>입니다.<br>
+                            단순한 연결 속에서 기술은 경험이 되고, 감성은 구조 속에서 완성됩니다. <br /> 그리고 그 모든 흐름 안에는 저의 <span>시간</span>이
+                            있습니다.<br>
+                            <span>시행착오와 탐색의 흔적 등, 작은 점</span>이 쌓여 지금의 저를 만들었습니다.<br>
+                            구조를 설계하고 감성을 구현하는 사람, 그 과정 속에서 쌓인 감각과 기술,<br /> 그것이 <span>"지금의 나를 만든 선"</span>이며, <br />저는 그
+                            모든
+                            경험을 연결해 <span>현재의 세상을 디자인하고 구현해 내는 웹 퍼블리셔</span>입니다.
+                        </p>
+                        <span class="highlight">앞으로 저와의 여정을 함께해 주세요.</span>
+                        <em><img src="img/ArrowDown.png" alt="화살표밑"></em>
+                    </div><!-- .text end -->
+
+                </div><!--card-cover end  -->
+            </section><!-- .section-01 end -->
+
+
+
+
+
+            <!-- 메인2 -->
+            <section class="section-02" id="section-02" data-aos="zoom-in-up" data-aos-delay="400">
+                <div class="inner">
+                    <section class="card" id="design">
+                        <div class="icon">👩🏻‍💻</div>
+
+                        <div class="image">
+                            <img src="img/me.jpg" alt="증명사진">
+                            <ul class="contact">
+                                <li class="group">
+                                    <ul class="name">
+                                        <li class="big">김소원</li>
+                                        <li>Kim Sowon</li>
+                                    </ul><!-- name -->
+                                    <ul class="birth">
+                                        <li class="big">B</li>
+                                        <li>1995.06.07</li>
+                                    </ul><!-- birth -->
+                                    <ul class="phone">
+                                        <li class="big">P</li>
+                                        <li>010-2047-8672</li>
+                                    </ul><!-- phone -->
+                                    <ul class="mail">
+                                        <li class="big">M</li>
+                                        <li>fthg0207@naver.com</li>
+                                    </ul><!-- mail -->
+                                </li><!-- .group end -->
+                                <button><a href="../img/">이력서보기</a></button>
+                            </ul><!-- .contact end -->
+                        </div><!--  image end -->
+                    </section><!-- .card design -->
+
+
+
+                    <div class="card" id="tech">
+                        <div class="icon">💻</div>
+                        <div class="item">
+                            <h2>Education</h2>
+                            <ul class="depth-01">
+                                <li class="jump"><span class="bold">2016</span> 부산예술대학교 실용음악과 졸업</li>
+                                <li class="jump"><span class="bold">2014</span> 양산여자고등학교 졸업</li>
+                            </ul><!-- Education end -->
+                            <ul><!-- depth-01 end -->
+                        </div><!-- .item end -->
+
+                        <div class="item">
+                            <h2>Certifications</h2>
+                            <ul class="depth-01">
+                                <li class="jump"><span class="bold">2007</span> 워드프로세서 2급</li>
+                                <li class="jump"><span class="bold">2006</span> 워드프로세서 3급</li>
+                            </ul><!-- Education end -->
+                            <ul><!-- depth-01 end -->
+                        </div><!-- .item end -->
+
+                        <div class="item">
+                            <h2>Experience</h2>
+                            <ul class="depth-01">
+                                <li><span class="bold">2021.03-2025.03</span> 신세계인터네셔널 SSG.COM 근무</li>
+                                <li><span class="bold">2020.11-2021.03</span> 쿠팡물류센터 근무</li>
+                                <li><span class="bold">2019.06-2020.05</span> 롯데백화점 MVG라운지 근무</li>
+                                <li><span class="bold">2017.11-2019.01</span> 맥도날드 근무</li>
+                                <li><span class="bold">2016.04-2017.11</span> 음료판매점 쥬씨 근무</li>
+
+
+                            </ul><!-- depth-01 end -->
+
+                            <ul class="dpth-02">
+                                <h2>Activities</h2>
+                                <li class="mov"><span class="bold">2025</span> 그린컴퓨터아카데미 UI/UX 반응형 웹디자인 & 웹퍼블리셔 양성과정 수료
+                                </li>
+                                <li class="mov"><span class="bold">2020.12</span> 부산영상위원회 부산아시아영화학교주최 2020맞춤형
+                                    영화영상전문인력 양성 온라인
+                                    영화음악심화과정 수료</li>
+                                <li class="mov"><span class="bold">2016.01</span> 부산 문화재단 주최 기본 음향기기의 세팅과 운영 실습과정 수료
+                                </li>
+                                <li class="mov"><span class="bold">2015.06</span> 부경대학교주최 부경대학교 대학가요제 동상수상</li>
+                            </ul><!-- depth-02 -->
+                        </div><!-- .item end -->
+
+
+
+
+
+                    </div><!-- card tech -->
+                    <div class="result" id="result">
+                        <div class="item">
+                            <h2>Skills</h2>
+                            <p>HTML, SASS, JavaScript, jQuery를 통해 반응형 웹사이트와 동적 사용자 인터페이스를 구현하며, GitHub를 활용한 버전 관리와 협업
+                                경험을 쌓았습니다.
+                                Photoshop, Figma, Illustrator를 사용하여 UI/UX 디자인을 최적화하고, 사용자 경험을 고려한 웹 애플리케이션을 개발했습니다.
+                                또한, 다양한 도구와 기술을 통합하여, 실용적이고 창의적인 웹 개발 역량을 지속적으로 확장하고 있습니다.</p>
+                        </div><!-- .item end -->
+                    </div><!--result end  -->
+                </div><!-- .inner -->
+
+
+                <!-- skill -->
+
+                <div class="marquee">
+                    <ul class="marquee-content">
+
+                        <li class="image"><img src="img/git.png" alt="jquery"></li>
+                        <li class="image"><img src="img/html5.png" alt="html5"></li>
+                        <li class="image"><img src="img/js.png" alt="js"></li>
+                        <li class="image"><img src="img/notion.png" alt="notion"></li>
+                        <li class="image"><img src="img/sass.png" alt="sass"></li>
+
+                        <li class="image"><img src="img/adobe.png" alt="adobe"></li>
+                        <li class="image"><img src="img/query.png" alt="jquery"></li>
+                        <li class="image"><img src="img/ai.png" alt="ai"></li>
+                        <li class="image"><img src="img/adobe.png" alt="adobe"></li>
+                        <li class="image"><img src="img/photo.png" alt="photo"></li>
+                        <li class="image"><img src="img/visual.png" alt="visual"></li>
+                        <li class="image"><img src="img/git.png" alt="jquery"></li>
+                        <li class="image"><img src="img/html5.png" alt="html5"></li>
+                        <li class="image"><img src="img/js.png" alt="js"></li>
+                        <li class="image"><img src="img/notion.png" alt="notion"></li>
+                        <li class="image"><img src="img/sass.png" alt="sass"></li>
+
+                        <li class="image"><img src="img/adobe.png" alt="adobe"></li>
+                        <li class="image"><img src="img/query.png" alt="jquery"></li>
+                        <li class="image"><img src="img/ai.png" alt="ai"></li>
+                        <li class="image"><img src="img/adobe.png" alt="adobe"></li>
+                        <li class="image"><img src="img/photo.png" alt="photo"></li>
+                        <li class="image"><img src="img/visual.png" alt="visual"></li>
+
+                    </ul><!-- marquee-content -->
+
+                </div><!-- marquee -->
+
+
+
+            </section><!-- section-02 -->
+
+            <section class="section-03" id="section-03">
+
+
+                <section class="con01">
+                    <h2 data-aos="fade-right" data-aos-delay="700"><span data-aos="fade-right"
+                            data-aos-delay="600">My</span>Project</h2>
+                </section><!-- con01 end -->
+
+                <div class="con02">
+                    <div class="circle">
+                        <div class="text_box">
+                            <p>
+                                UIUX<br />Design
+                            </p>
+                        </div><!-- text_box end -->
+                    </div><!-- circle end -->
+                </div><!-- con02 end -->
+
+                <div class="con03">
+
+                </div><!-- .con03 end -->
+
+            </section><!-- section-03 end -->
+
+            <section class="section-04" id="section-04">
+
+                <div class="div-inner-1">
+                    <section class="section-1">
+                        <h1>SECTION 1</h1>
+                    </section><!-- section-1 end -->
+                </div><!-- div-inner-1 end -->
+
+                <div class="div-inner-2">
+                    <section class="section-2">
+                        <h1>SECTION 2</h1>
+                    </section><!-- section-2 end -->
+                </div><!-- div-inner-2 end -->
+
+                <div class="div-inner-3">
+                    <section class="section-3">
+                        <h1>SECTION 3</h1>
+                    </section><!-- section-3 end -->
+                </div><!-- div-inner-3 end -->
+
+                <div class="div-inner-4">
+                    <section class="section-4">
+                        <h1>SECTION 4</h1>
+                    </section><!-- section-4 end -->
+                </div><!-- div-inner-4 end -->
+
+            </section><!-- section-04 end -->
+
+
+            <section class="section-05" id="section-05"><!-- section-05  -->
+                <div class="wrapper">
+                    <div class="section">
+                        <h2 class="section-title">
+                            GRAPHIC DESIGN
+                        </h2><!-- section-title end -->
+                        <p class="section-desc">
+                           A Collection of Works in Branding, Editorial, and Digital Design
+                        </p><!-- section-desc end -->
+                        <div class="swiper steps">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <article class="card-wrapper">
+                                        <div class="card-circle">1</div><!-- card-circle end -->
+                                        <div class="card">
+                                            <h3 class="card-title">Plan Ahead</h3><!-- card-title end -->
+                                            <p class="card-desc">
+                                                Write down 3 key tasks you want to accomplish today before checking your
+                                                phone.
+                                            </p><!-- card-desc end -->
+                                            <figure class="card-figure">
+                                                <img class="card-img"
+                                                    src="https://arman-borkhani.github.io/codepen-cpc-css-shape/assets/plan.jpg"
+                                                    alt="" /><!-- card-img end -->
+                                            </figure><!-- card-figure end -->
+                                        </div><!-- card end -->
+                                    </article><!-- card-wrapper end -->
+                                </div><!-- swiper-slide end -->
+                                <div class="swiper-slide">
+                                    <article class="card-wrapper">
+                                        <div class="card-circle">2</div><!-- card-circle end -->
+                                        <div class="card">
+                                            <h3 class="card-title">Get Moving</h3><!-- card-title end -->
+                                            <p class="card-desc">
+                                                Do a short workout, stretch, or walk to activate your energy and improve
+                                                your focus.
+                                            </p><!-- card-desc end -->
+                                            <figure class="card-figure">
+                                                <img class="card-img"
+                                                    src="https://arman-borkhani.github.io/codepen-cpc-css-shape/assets/moving.jpg"
+                                                    alt="" /><!-- card-img end -->
+                                            </figure><!-- card-figure end -->
+                                        </div><!-- card end -->
+                                    </article><!-- card-wrapper end -->
+                                </div><!-- swiper-slide end -->
+                                <div class="swiper-slide">
+                                    <article class="card-wrapper">
+                                        <div class="card-circle">3</div><!-- card-circle end -->
+                                        <div class="card">
+                                            <h3 class="card-title">Find Calm</h3><!-- card-title end -->
+                                            <p class="card-desc">
+                                                Spend a few quiet minutes meditating, journaling, or just breathing
+                                                mindfully before diving into work.
+                                            </p><!-- card-desc end -->
+                                            <figure class="card-figure">
+                                                <img class="card-img"
+                                                    src="https://arman-borkhani.github.io/codepen-cpc-css-shape/assets/calm.jpg"
+                                                    alt="" /><!-- card-img end -->
+                                            </figure><!-- card-figure end -->
+                                        </div><!-- card end -->
+                                    </article><!-- card-wrapper end -->
+                                </div><!-- swiper-slide end -->
+                            </div><!-- swiper-wrapper end -->
+                            <div class="swiper-pagination"></div><!-- swiper-pagination end -->
+                        </div><!-- swiper steps end -->
+                    </div><!-- section end -->
+                </div><!-- wrapper end -->
+            </section><!-- section-05 end -->
+
+        </main><!-- .main end -->
+
+    </div><!-- wrap end -->
+</body>
+
+</html>

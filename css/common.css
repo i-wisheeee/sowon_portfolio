@@ -1,0 +1,78 @@
+@font-face {
+    font-family: 'Paperozi';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-5Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'ChilgokHalmaeKwonAnJa';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/Chilgok_Kaj.woff2') format('woff2'),
+        url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/Chilgok_Kaj.woff') format('woff'),
+        url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/Chilgok_Kaj.ttf') format('truetype');
+    /* 여러 포맷을 지정하여 호환성 높임 */
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+    /* 폰트가 로드되기 전까지는 시스템 폰트를 사용 */
+}
+
+@font-face {
+    font-family: 'Paperozi';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-display: swap;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
+
+@font-face {
+    font-family: 'Cafe24MeongiWhite';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2405-3@1.1/Cafe24Meongi-W-v1.0.woff2') format('woff2');
+    font-weight: normal;
+    font-display: swap;
+}
+
+
+html,
+body {
+    /* font-size: 10px; */
+    font-size: 62.5%;
+    /* background-color: #d3ebd1; */
+   
+    font-family: 'Paperozi', sans-serif;
+}
+
+
+.section-01 {
+    font-family: 'ChilgokHalmaeKwonAnJa', sans-serif;
+}
+
+.section-01 button,
+.section-02,
+.section-01 h2,
+.section-03 {
+    font-family: 'Paperozi', sans-serif;
+}
+
+:root {
+
+    --r: 3rem;
+    --s: 4rem;
+    --marquee-width: 100vw;
+    --marquee-height: 20vh;
+    --marquee-elements: 11;
+    --marquee-elements-displayed: 5;
+    --marquee-element-width: calc(var(--marquee-width) / var(--marquee-elements-displayed));
+    --marquee-animation-duration: calc(var(--marquee-elements) * 3s);
+
+
+    --accent: #2f74ff;
+    --accent-2: #9ac0ff;
+    --white: #fff;
+    --glass: rgba(255, 255, 255, 0.12);
+    --glass-2: rgba(255, 255, 255, 0.08);
+    --stroke: rgba(255, 255, 255, 0.18);
+    --shadow-strong: 0 24px 80px rgba(0, 0, 0, .45);
+    --shadow-soft: 0 10px 30px rgba(0, 0, 0, .25);
+}
