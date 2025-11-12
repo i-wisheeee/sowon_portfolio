@@ -96,7 +96,7 @@ body {
 .main_visual {
   background-color: #b7d3ff;
   position: relative;
-  width: 100vw;
+  width: 100%;
   height: 150vh;
   position: relative;
   margin: 50vh 0;
@@ -600,7 +600,7 @@ body {
   box-shadow: 0 1.6rem 3rem rgba(0, 0, 0, 0.4), 0 0 3rem rgba(122, 168, 255, 0.85) inset;
 }
 .section-02 .marquee {
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   height: var(--marquee-height);
   background-color: rgba(18, 58, 95, 0.979);
@@ -608,13 +608,13 @@ body {
   /* 절대 위치로 설정하여 다른 요소와 겹치지 않게 함 */
   top: 0;
   /* 상단에 고정 */
-  left: -18%;
+  left: -26rem;
   /* 좌측에 맞춰서 고정 */
   right: 0;
   /* 우측도 맞춰서 고정 */
-  width: 100vw;
+  width: 500rem;
   /* 전체 화면 너비 */
-  height: var(--marquee-height);
+  height: 15rem;
   /* 높이 설정 */
   background-color: rgba(51, 51, 51, 0.74);
   /* 배경 색 */
@@ -701,6 +701,9 @@ body {
   }
 }
 /* 메인3 */
+.section-03 {
+  width: 100%;
+}
 .section-03 section {
   height: 100vh;
   display: flex;
@@ -776,14 +779,14 @@ body {
   gap: 5rem;
 }
 .section-04 > div {
-  width: 60%;
+  width: 100%;
   height: 200vh;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 }
 .section-04 section {
-  width: 100%;
+  width: 80%;
   height: 45%;
   position: sticky;
   top: 5%;
@@ -798,66 +801,340 @@ body {
   padding: 7rem;
 }
 .section-04 .text {
-  width: 50%;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 72rem;
 }
-.section-04 .text h2 {
-  font-size: 8rem;
+.section-04 .text .box .title {
+  display: flex;
+  align-items: center;
+  line-height: 8rem;
+  justify-content: left;
+  text-align: left;
+}
+.section-04 .text .box .title h2 {
+  font-size: 7rem;
   color: #000;
-  margin-bottom: 1rem;
+  margin: 0 2rem;
+  white-space: nowrap;
 }
-.section-04 .text p {
+.section-04 .text .box .title .color {
+  display: flex;
+  flex-direction: column;
+}
+.section-04 .text .box .title ul {
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  line-height: 1.3;
+}
+.section-04 .text .box .title ul .col {
+  font-size: 1.8rem;
+  color: #000;
+}
+.section-04 .text .box .title ul li {
+  font-size: 2rem;
+  color: #00AAE7;
+  font-weight: bold;
+  margin-right: 1rem;
+}
+.section-04 .text .box p {
+  margin-top: 4rem;
   font-size: 2rem;
   color: #7a7a7a;
+  line-height: 1.7;
+  font-size: 1.8rem;
+}
+.section-04 .text .box p em {
+  color: #00AAE7;
+  font-weight: bold;
+}
+.section-04 .text span {
+  font-size: 2rem;
+  margin-top: 2rem;
+  font-weight: bold;
+}
+.section-04 .text .list {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 4rem;
+  line-height: 1.2;
+  gap: 1rem;
+  font-size: 1.8rem;
+}
+.section-04 .text em {
+  font-size: 2rem;
+  color: #000;
+  font-weight: bold;
+  margin-top: 4rem;
+  margin-bottom: 2rem;
+}
+.section-04 .text .btn {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.section-04 .text .btn li a {
+  width: 15rem;
+  height: 7rem;
+  position: relative;
+  display: inline-block;
+  padding: 0.5rem 2rem;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #2e2e2e;
+  border-radius: 1rem;
+  overflow: hidden;
+  cursor: pointer;
+  background: rgba(180, 201, 248, 0.631372549);
+  text-align: center;
+  align-items: center;
+  line-height: 3;
+  transition: all 0.3s ease;
+  box-shadow: 0 0.4rem 1rem rgba(0, 0, 0, 0.233);
+}
+.section-04 .text .btn li a::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, #005ef5, #00bfff);
+  z-index: 0;
+  transition: all 0.4s ease;
+}
+.section-04 .text .btn li a span {
+  position: relative;
+  z-index: 12;
+}
+.section-04 .text .btn li a span img {
+  width: 1.8rem;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.section-04 .text .btn li a:hover::before {
+  left: 0;
+}
+.section-04 .text .btn li a:hover {
+  color: #fff;
+  transform: translateY(-0.6rem);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.25);
+}
+.section-04 .text .btn li a:active {
+  transform: translateY(0);
+  box-shadow: 0 4rem 1rem rgba(0, 0, 0, 0.1);
+}
+.section-04 .section-2 .text .box .title .color li {
+  color: #f0c118;
+}
+.section-04 .section-2 .text p em {
+  color: #f0c118;
+}
+.section-04 .section-2 .mockup {
+  background: url("../img/all_z.png") no-repeat center/contain;
+  width: 100rem;
+  height: 70rem;
+  position: relative;
+  border-radius: 2rem;
+  border-radius: 2.5rem;
+  overflow: hidden;
+}
+.section-04 .section-2 .mockup p {
+  position: absolute;
+  top: 90%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #4d4d4d;
+  font-size: 2rem;
+  z-index: 999;
+  white-space: nowrap;
+  letter-spacing: 0.2rem;
+  font-size: 1.8rem;
+}
+.section-04 .section-2 .mockup .wrap {
+  position: relative;
+  width: 100%;
+  height: 50%;
+}
+.section-04 .section-2 .mockup .wrap .image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.section-04 .section-2 .mockup .wrap .image img.pc {
+  position: absolute;
+  top: 16%;
+  left: 35.5%;
+  width: 58%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  transition: transform 10s ease-in-out;
+  cursor: pointer;
+}
+.section-04 .section-2 .mockup .wrap .image img.ta {
+  position: absolute;
+  top: 30%;
+  left: 2%;
+  width: 35%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  transition: transform 10s ease-in-out;
+  cursor: pointer;
+}
+.section-04 .section-2 .mockup .wrap .image img.mo {
+  position: absolute;
+  top: 50%;
+  left: 65%;
+  width: 25%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  transition: transform 10s ease-in-out;
+  cursor: pointer;
+}
+.section-04 .section-2 .mockup .wrap .image img:hover {
+  transform: translateY(-100%);
+}
+.section-04 .section-3 .text .box .title h2 {
+  font-size: 6rem;
+  white-space: wrap;
+}
+.section-04 .section-3 .text .box .title .color {
+  display: flex;
+  margin-bottom: 1rem;
+}
+.section-04 .section-4 .text .box .title .color p {
+  font-size: 1.8rem;
+  color: #000;
+}
+.section-04 .section-4 .text .box .title .color ul {
+  display: flex;
+  flex-wrap: wrap;
+}
+.section-04 .section-4 .text .box .title .color ul li {
+  font-size: 2rem;
+  color: #005BAC;
+}
+.section-04 .section-4 .text p em {
+  color: #005BAC;
+}
+.section-04 .section-4 .image {
+  width: 50%;
+  height: 90%;
+}
+.section-04 .section-4 .image img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.section-04 .section-5 .text .box .title .color ul li {
+  color: #006f3f;
+}
+.section-04 .section-5 .text p em {
+  color: #006f3f;
+}
+.section-04 .section-5 .image {
+  width: 50%;
+  height: 90%;
+}
+.section-04 .section-5 .image img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 .section-04 .mockup {
   width: 74.5rem;
   height: 73rem;
-  background: url("../img/1.png") no-repeat center center;
-  background-size: cover;
-  overflow: hidden;
-  position: sticky;
-  left: 10%;
+  position: relative;
+  background: url("../img/1.png") no-repeat center/cover;
   border-radius: 2.5rem;
+  overflow: hidden;
+  position: relative;
+}
+.section-04 .mockup p {
+  position: absolute;
+  top: 95%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #4d4d4d;
+  font-size: 2rem;
+  z-index: 999;
+  white-space: nowrap;
+  letter-spacing: 0.2rem;
+  font-size: 1.8rem;
 }
 .section-04 .mockup .wrap {
   position: absolute;
-  top: 7%;
-  right: 3.5%;
-}
-.section-04 .mockup .wrap .image {
-  width: 66.5rem;
+  top: 6%;
+  left: 4%;
+  width: 92%;
+  height: 55%;
   overflow: hidden;
 }
 .section-04 .mockup .wrap .image img {
   width: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
   position: absolute;
   top: 0;
-  transform: translateY(0);
+  left: 0;
+  -o-object-fit: cover;
+     object-fit: cover;
   transition: transform 10s ease-in-out;
   cursor: pointer;
 }
 .section-04 .mockup .wrap .image img:hover {
   transform: translateY(-100%);
 }
+.section-04 .mockup .wrap2 {
+  position: absolute;
+  top: 27.5%;
+  left: 8.5%;
+  width: 29%;
+  height: 47%;
+  overflow: hidden;
+}
+.section-04 .mockup .wrap2 .image img {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  -o-object-fit: cover;
+     object-fit: cover;
+  transition: transform 10s ease-in-out;
+  cursor: pointer;
+}
+.section-04 .mockup .wrap2 .image img:hover {
+  transform: translateY(-100%);
+}
+.section-04 .mockup .wrap3 {
+  position: absolute;
+  top: 45%;
+  left: 3%;
+  width: 11%;
+  height: 30%;
+  overflow: hidden;
+}
+.section-04 .mockup .wrap3 .image img {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  -o-object-fit: cover;
+     object-fit: cover;
+  transition: transform 10s ease-in-out;
+  cursor: pointer;
+}
+.section-04 .mockup .wrap3 .image img:hover {
+  transform: translateY(-100%);
+}
 
-/* 미디어쿼리 */
-@media (min-width: 768px) {
-  .swiper-slide {
-    width: 48%;
-  }
-}
-@media (min-width: 1024px) {
-  .swiper-slide {
-    width: 32%;
-  }
-}
 /* 메인5 - section-05 */
 .section-05 {
   width: 100%;
   min-height: 100vh;
-  padding: 4rem 1.6rem;
+  padding: 2rem 1.6rem;
   background-color: #f5f5f5;
   color: #1a1a1a;
   margin-bottom: 50rem;
@@ -866,27 +1143,30 @@ body {
 .section-05 .section-title {
   font-size: 12rem;
   font-weight: 700;
-  margin-bottom: 2rem;
+  margin: 10rem;
   text-align: center;
 }
 .section-05 .section-desc {
   font-size: 2rem;
   color: #555;
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 10em;
+  line-height: 1.5;
 }
 .section-05 .card-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   grid-auto-rows: auto;
   gap: 2rem;
   justify-items: center;
+  margin-bottom: 10rem;
 }
 .section-05 .card-grid .card-wrapper {
   width: 100%;
   max-width: 30rem;
   position: relative;
   margin-bottom: 5rem;
+  overflow: visible;
 }
 .section-05 .card-grid .card-wrapper .card-circle {
   width: 6rem;
@@ -899,8 +1179,8 @@ body {
   font-weight: 700;
   font-size: 1.5rem;
   position: absolute;
-  top: -6rem;
-  z-index: 5;
+  top: -4rem;
+  z-index: 9;
   left: 50%;
   transform: translateX(-50%);
   box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.1);
@@ -915,7 +1195,14 @@ body {
   background-color: #fff;
   border-radius: 2rem;
   padding: 3rem 2rem 2rem;
+  position: relative;
   box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  z-index: 1;
+}
+.section-05 .card-grid .card-wrapper .card:hover {
+  overflow: visible;
+  z-index: 10;
 }
 .section-05 .card-grid .card-wrapper .card h3 {
   text-align: center;
@@ -941,14 +1228,30 @@ body {
   width: 100%;
   height: 20rem;
   border-radius: 1.5rem;
-  overflow: hidden;
+  overflow: visible;
   background-color: #ffd270;
+  position: relative;
 }
 .section-05 .card-grid .card-wrapper .card .card-figure img {
   width: 100%;
-  height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  height: auto;
+  -o-object-fit: contain;
+     object-fit: contain;
+  transition: transform 0.3s ease;
+  transform-origin: center center;
+  /* 중심 기준으로 확대 */
+  display: block;
+  /* transform이 깨지지 않도록 블록 요소로 */
+  z-index: 1;
+  position: auto;
+  will-change: transform;
+}
+.section-05 .card-grid .card-wrapper .card .card-figure img:hover {
+  transform: scale(2);
+  z-index: 10;
+  cursor: pointer;
+  position: absolute;
+  /* hover시 절대위치로 만들어 튀어나오되 원래자리에서 부드럽게 튀어나오도록 */
 }
 @media (max-width: 1024px) {
   .section-05 .card-grid {
@@ -996,7 +1299,6 @@ body {
   z-index: -1;
 }
 .footer .container {
-  order: 1;
   display: flex;
   gap: 1rem;
   overflow: hidden;
