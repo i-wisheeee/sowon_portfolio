@@ -1011,10 +1011,10 @@ body {
 }
 .section-04 .section-4 .text .box .title .color ul li {
   font-size: 2rem;
-  color: #005BAC;
+  color: #D4331A;
 }
 .section-04 .section-4 .text p em {
-  color: #005BAC;
+  color: rgba(212, 51, 26, 0.8666666667);
 }
 .section-04 .section-4 .image {
   width: 50%;
