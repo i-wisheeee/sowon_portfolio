@@ -33,38 +33,32 @@
             let menuOpen = false;
 
             function openMenu() {
-                if (menuOpen) return; // 이미 열려 있으면 무시
+                if (menuOpen) return;
                 menuOpen = true;
                 nav.classList.add("active");
+
                 gsap.to(nav, {
-                    xPercent: 0,
+                    x: "0%",    // 화면 안쪽으로
                     opacity: 1,
                     duration: 0.6,
                     ease: "power3.out",
                 });
             }
 
-            function openMenu() {
-                menuOpen = true;
-                gsap.to(nav, {
-                    x: "0%",      // 메뉴를 원래 위치로
-                    opacity: 1,
-                    duration: 0.6,
-                    ease: "power3.out"
-                });
-            }
-
             function closeMenu() {
                 menuOpen = false;
+                nav.classList.remove("active");
+
                 gsap.to(nav, {
-                    x: "100%",    // 화면 밖으로 이동
+                    x: "-110%", // 왼쪽으로 숨김
                     opacity: 0,
-                    duration: 0.5,
-                    ease: "power3.in"
+                    duration: 0.6,
+                    ease: "power3.in",
                 });
             }
 
 
+            // 메뉴 버튼 클릭
             menuBtn.addEventListener("click", (e) => {
                 e.stopPropagation();
                 menuBtn.classList.add("bounce");
@@ -72,17 +66,18 @@
                 menuOpen ? closeMenu() : openMenu();
             });
 
+            // 메뉴 외부 클릭 시 닫기
             document.addEventListener("click", (e) => {
                 if (menuOpen && !nav.contains(e.target) && !menuBtn.contains(e.target)) {
                     closeMenu();
                 }
             });
 
-            Array.from(nav.getElementsByTagName("a")).forEach(link => {
+            // 메뉴 내 링크 클릭 시 닫기 + 마우스 이미지 효과
+            Array.from(nav.getElementsByTagName("a")).forEach((link) => {
                 link.addEventListener("click", closeMenu);
 
-                // 마우스 이동 이미지
-                link.addEventListener("mousemove", e => {
+                link.addEventListener("mousemove", (e) => {
                     const rect = link.getBoundingClientRect();
                     const img = link.querySelector("img");
                     if (img) {
@@ -92,15 +87,13 @@
                 });
             });
 
-            // 메뉴 전체 Y축 부드럽게 이동
-            window.addEventListener("mousemove", e => {
+            // 마우스 Y축 부드럽게 따라가기
+            window.addEventListener("mousemove", (e) => {
                 if (!menuOpen) return;
                 const percent = e.clientY / window.innerHeight;
                 const translateY = percent * nav.offsetHeight * -0.2;
                 gsap.to(nav, { y: translateY, duration: 1.2, ease: "power2.out" });
             });
-
-
 
             //메인비주얼
 
@@ -354,7 +347,7 @@
                     // 다시 클릭 시 닫기 + active 해제
                     submenu.slideUp();
                     $(this).removeClass('active');
-                    
+
                 }
             });
 
@@ -441,15 +434,12 @@
 
 
                 <div class="btn">
-                    <a href="#section-03" class="btn-left">Project</a>
+                    <a href="#section-01" class="btn-left">About me</a>
                     <a href="#footer" class="btn-right">Contact</a>
                 </div><!-- .btn end -->
 
 
-                <div class="scroll-img">
-                    <img src="https://uploads-ssl.webflow.com/5cff83ac2044e22cb8cf2f11/5d00043816a6c695bcf1581a_scroll.gif"
-                        alt="마우스스크롤">
-                </div><!-- scroll-img -->
+
 
                 <div class="info-wrap">
                     <div class="info-cont">
@@ -459,14 +449,11 @@
                         <br>
                         <br>
                         <div class="shad">
-                            <a href="#section-01">About me</a>
+                            <a href="#section-04">Project</a>
                         </div><!-- .shad end -->
                     </div><!-- nfo-cont -->
                 </div><!-- nfo-wrap -->
-                <div class="scroll-img">
-                    <img src="https://uploads-ssl.webflow.com/5cff83ac2044e22cb8cf2f11/5d00043816a6c695bcf1581a_scroll.gif"
-                        alt="마우스스크롤">
-                </div><!-- scroll-img -->
+
             </section><!-- main_visual end -->
 
 
@@ -604,6 +591,7 @@
 
 
                 <!-- skill -->
+
 
 
                 <div class="textLoop">
