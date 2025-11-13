@@ -20,36 +20,40 @@ body {
 .header .menu-btn {
   font-size: 3rem;
   color: rgb(250, 250, 250);
-  background: rgba(81, 197, 243, 0.7450980392);
-  border-radius: 50%;
   width: 10rem;
   height: 10rem;
-  border: 0.1rem solid rgba(81, 197, 243, 0.7450980392);
   cursor: pointer;
   text-align: center;
   align-items: center;
   z-index: 1100;
+  transform-origin: center;
+  animation: bounce 2s infinite;
 }
 .header .menu-btn:hover {
-  background-color: #191b80;
-  border: transparent;
-  color: #fffb07;
+  scale: 1.3;
+  transition: all 1s ease;
+  color: #0287a8;
+  font-weight: bold;
   border-radius: 0%;
   height: 5rem;
   width: 10rem;
 }
 .header nav {
-  display: none;
+  display: flex;
   flex-direction: column;
-  position: absolute;
-  top: 50px;
+  position: fixed;
+  top: 5rem;
   width: 100%;
   text-align: center;
-  background: rgba(0, 0, 0, 0.9);
-  padding: 1rem 0;
+  background: rgba(0, 0, 0, 0.815);
+  padding: 2rem 1rem;
+  transform: translateX(100%);
+  /* 화면 밖으로 보내기 */
+  opacity: 0;
 }
 .header nav > a {
   color: rgb(255, 255, 255);
+  border-bottom: 0.1rem solid rgba(227, 227, 227, 0.7098039216);
   font-family: "Cafe24MeongiWhite", sans-serif;
   font-size: clamp(1rem, 3vw, 4rem);
   font-weight: 500;
@@ -84,6 +88,9 @@ body {
   transition: transform 0.25s, opacity 0.25s;
   pointer-events: none;
   width: min(40vw, 30rem);
+  -o-object-fit: contain;
+     object-fit: contain;
+  pointer-events: none;
 }
 .header nav > a:hover > img {
   opacity: 1;
@@ -93,6 +100,17 @@ body {
   color: black;
 }
 
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-15px);
+  }
+  60% {
+    transform: translateY(-8px);
+  }
+}
 .main_visual {
   background-color: #b7d3ff;
   position: relative;
@@ -350,6 +368,7 @@ body {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  /* textloop */
 }
 .section-02 .inner {
   display: grid;
@@ -599,105 +618,83 @@ body {
   transform: translateY(-0.2rem) scale(1.04);
   box-shadow: 0 1.6rem 3rem rgba(0, 0, 0, 0.4), 0 0 3rem rgba(122, 168, 255, 0.85) inset;
 }
-.section-02 .marquee {
-  width: 100%;
-  height: 100vh;
-  height: var(--marquee-height);
-  background-color: rgba(18, 58, 95, 0.979);
-  position: absolute;
-  /* 절대 위치로 설정하여 다른 요소와 겹치지 않게 함 */
-  top: 0;
-  /* 상단에 고정 */
-  left: -26rem;
-  /* 좌측에 맞춰서 고정 */
-  right: 0;
-  /* 우측도 맞춰서 고정 */
-  width: 500rem;
-  /* 전체 화면 너비 */
-  height: 15rem;
-  /* 높이 설정 */
-  background-color: rgba(51, 51, 51, 0.74);
-  /* 배경 색 */
-  overflow: hidden;
+.section-02 .textLoop {
+  width: 300rem;
+  padding: 2rem;
   position: relative;
-  margin-top: 6rem;
+  bottom: -20rem;
+  left: -30rem;
+  margin-bottom: 50rem;
+  transform: rotate3d(1, 0, 0, 25deg);
+}
+.section-02 .textLoop ul {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
+  gap: 2rem;
 }
-.section-02 .marquee:before, .section-02 .marquee:after {
-  position: absolute;
-  top: 0;
-  width: 10rem;
-  height: 100%;
-  content: "";
-  z-index: 1;
-}
-.section-02 .marquee:before {
-  left: 0;
-  background: linear-gradient(to right, rgba(217, 217, 217, 0.3803921569) 0%, transparent 100%);
-}
-.section-02 .marquee:after {
-  right: 0;
-  background: linear-gradient(to left, rgba(197, 197, 197, 0.3215686275) 0%, transparent 100%);
-}
-.section-02 .marquee .marquee-content {
-  position: relative;
-  z-index: 9990;
-  min-width: 100%;
-  width: -moz-max-content;
-  width: max-content;
+.section-02 .textLoop ul li {
+  width: 8rem;
+  height: 8rem;
   display: flex;
-  width: 100%;
-  align-items: center;
-  justify-content: space-between;
+  white-space: nowrap;
+  gap: 2rem;
+}
+.section-02 .textLoop ul li img {
   width: 100%;
   height: 100%;
-  gap: 10rem;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
-.section-02 .marquee .marquee-content li {
-  width: var(--marquee-element-width);
-  max-height: 100%;
+.section-02 .textLoop ul li em {
+  font-size: 6rem;
+  white-space: nowrap;
   display: block;
 }
-.section-02 .marquee .marquee-content .image {
-  animation: scrolling var(--marquee-animation-duration) linear infinite;
+.section-02 .textLoop ul.a {
   display: flex;
-  flex-direction: column;
-  gap: 10rem;
   justify-content: space-between;
-  align-items: center;
-  width: 12rem;
-  max-height: 100%;
-  white-space: nowrap;
+  width: 100%;
+  transform: rotateZ(10deg);
+  position: absolute;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0);
+  color: #fff;
+  border-top: 0.1rem solid #fff;
+  border-bottom: 0.1rem solid #fff;
 }
-.section-02 .marquee .marquee-content .image img {
-  -o-object-fit: contain;
-     object-fit: contain;
-  width: auto;
-  height: 8rem;
+.section-02 .textLoop ul.a li {
+  animation: textLoop 3s linear infinite;
+}
+.section-02 .textLoop ul.b {
+  display: flex;
+  width: 100%;
+  transform: rotateZ(-12deg);
+  justify-content: space-between;
+  position: absolute;
+  padding: 1rem;
+  top: -15rem;
+  background: rgb(255, 255, 255);
+  color: rgba(0, 0, 0, 0.5725490196);
+}
+.section-02 .textLoop ul.b li {
+  animation: textLoop2 3s linear infinite;
 }
 
-@keyframes scrolling {
+@keyframes textLoop {
   0% {
-    transform: translateX(0);
+    transform: translateX(-100%);
+    /* 처음부터 보이게 */
   }
   100% {
-    transform: translateX(calc(-1 * var(--marquee-element-width) * var(--marquee-elements)));
+    transform: translateX(0);
   }
 }
-@media (max-width: 600px) {
-  html {
-    font-size: 12px;
+@keyframes textLoop2 {
+  0% {
+    transform: translateX(0);
+    /* 처음부터 보이게 */
   }
-  :root {
-    --marquee-width: 100vw;
-    --marquee-height: 16vh;
-    --marquee-elements-displayed: 3;
-  }
-  .marquee:before, .marquee:after {
-    width: 5rem;
+  100% {
+    transform: translateX(-100%);
   }
 }
 /* 메인3 */
@@ -1133,12 +1130,25 @@ body {
 /* 메인5 - section-05 */
 .section-05 {
   width: 100%;
-  min-height: 100vh;
+  min-height: 200vh;
   padding: 2rem 1.6rem;
   background-color: #f5f5f5;
   color: #1a1a1a;
-  margin-bottom: 50rem;
-  border-radius: 0 0 5rem 5rem;
+  margin-bottom: 20vh;
+  border-radius: 0 0 10rem 10rem;
+  box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.15), inset 0 -1rem 2rem rgba(255, 255, 255, 0.6);
+  /*  @media (max-width: 1024px) {
+          .card-grid {
+              grid-template-columns: repeat(2, 1fr);
+          }
+      }
+
+      @media (max-width: 768px) {
+          .card-grid {
+              grid-template-columns: 1fr;
+          }
+      }
+  } */
 }
 .section-05 .section-title {
   font-size: 12rem;
@@ -1180,7 +1190,7 @@ body {
   font-size: 1.5rem;
   position: absolute;
   top: -4rem;
-  z-index: 9;
+  z-index: 11;
   left: 50%;
   transform: translateX(-50%);
   box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.1);
@@ -1243,7 +1253,6 @@ body {
   display: block;
   /* transform이 깨지지 않도록 블록 요소로 */
   z-index: 1;
-  position: auto;
   will-change: transform;
 }
 .section-05 .card-grid .card-wrapper .card .card-figure img:hover {
@@ -1252,16 +1261,6 @@ body {
   cursor: pointer;
   position: absolute;
   /* hover시 절대위치로 만들어 튀어나오되 원래자리에서 부드럽게 튀어나오도록 */
-}
-@media (max-width: 1024px) {
-  .section-05 .card-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media (max-width: 768px) {
-  .section-05 .card-grid {
-    grid-template-columns: 1fr;
-  }
 }
 
 .topbtn {
@@ -1292,27 +1291,91 @@ body {
   position: relative;
 }
 
+/*푸터 */
 .footer {
   width: 100%;
-  height: 50rem;
-  position: fixed;
-  z-index: -1;
+  height: 20vh;
+  position: relative;
+  z-index: 99;
+}
+.footer .utill {
+  display: flex;
+  padding: 0 10rem;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+.footer .utill .menu {
+  margin-bottom: 3rem;
+}
+.footer .utill .menu p {
+  margin-bottom: 1rem;
+  font-size: 5rem;
+  font-weight: bold;
+  -webkit-text-stroke: 1rem solid #ffffff;
+  pointer-events: none;
+}
+.footer .utill .menu ul li {
+  line-height: 1.5;
+  font-size: 3rem;
+  color: #000;
+}
+.footer .utill .menu ul li:hover {
+  color: #fff;
+  transition: all 0.5s ease;
+}
+.footer .utill .con {
+  display: flex;
+  gap: 2rem;
+  text-align: center;
+}
+.footer .utill .con li {
+  font-size: 3rem;
+  align-items: center;
+  line-height: 4.5;
+  width: 15rem;
+  height: 15rem;
+  background-color: #fff;
+  color: #000;
+  border-radius: 3rem;
+  border: 0.2rem solid #000;
+  box-shadow: 0 0.8rem #666565;
+  transition: all 0.1s ease;
+}
+.footer .utill .con li a {
+  display: inline-block;
+}
+.footer .utill .con :active {
+  box-shadow: 0 0.2rem #181818;
+  transform: translateY(0.3rem);
+  color: rgb(4, 47, 126);
+  font-weight: bold;
 }
 .footer .container {
   display: flex;
   gap: 1rem;
-  overflow: hidden;
+  justify-content: space-between;
   background-color: rgb(147, 185, 255);
+  -webkit-text-stroke: rgba(0, 0, 0, 0.6823529412);
 }
-.footer h3 {
+.footer .container h3 {
   white-space: nowrap;
   font-family: "Cafe24MeongiWhite", sans-serif;
-  animation: marquee 25s linear infinite;
-  font-size: 5rem;
+  animation: marquee 60s linear infinite;
+  font-size: 10rem;
+  padding: 2rem;
+}
+.footer p {
+  font-size: 1.4rem;
+  text-align: center;
+  padding: 2rem 0;
 }
 
 @keyframes marquee {
-  to {
+  0% {
+    transform: translateX(0);
+    /* 처음부터 보이게 */
+  }
+  100% {
     transform: translateX(-100%);
   }
 }/*# sourceMappingURL=main.css.map */

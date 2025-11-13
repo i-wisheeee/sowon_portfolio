@@ -27,77 +27,79 @@
     <script>
         $(function () {
             AOS.init();
-            gsap.registerPlugin(ScrollTrigger);
 
-            $(".menu-btn").on("click", function () {
-                $("#nav").toggle();  // 메뉴 보이기/숨기기
-            });
+            const nav = document.getElementById("nav");
+            const menuBtn = document.querySelector(".menu-btn");
+            let menuOpen = false;
 
-
-            $("#nav a").on("mousemove", function (e) {
-                const rect = this.getBoundingClientRect();
-                const $img = $(this).find("img");
-
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-
-                $img.css({
-                    left: `${x}px`,
-                    top: `${y}px`
+            function openMenu() {
+                if (menuOpen) return; // 이미 열려 있으면 무시
+                menuOpen = true;
+                nav.classList.add("active");
+                gsap.to(nav, {
+                    xPercent: 0,
+                    opacity: 1,
+                    duration: 0.6,
+                    ease: "power3.out",
                 });
+            }
+
+            function openMenu() {
+                menuOpen = true;
+                gsap.to(nav, {
+                    x: "0%",      // 메뉴를 원래 위치로
+                    opacity: 1,
+                    duration: 0.6,
+                    ease: "power3.out"
+                });
+            }
+
+            function closeMenu() {
+                menuOpen = false;
+                gsap.to(nav, {
+                    x: "100%",    // 화면 밖으로 이동
+                    opacity: 0,
+                    duration: 0.5,
+                    ease: "power3.in"
+                });
+            }
+
+
+            menuBtn.addEventListener("click", (e) => {
+                e.stopPropagation();
+                menuBtn.classList.add("bounce");
+                setTimeout(() => menuBtn.classList.remove("bounce"), 500);
+                menuOpen ? closeMenu() : openMenu();
             });
 
-            // 배경 클릭 시 메뉴 닫기
-            $(document).on("click", function (e) {
-                // 메뉴나 메뉴 버튼 외부를 클릭했을 때 메뉴를 닫는다.
-                if (!$(e.target).closest("#nav, .menu-btn").length) {
-                    $("#nav").hide();  // 메뉴 숨기기
+            document.addEventListener("click", (e) => {
+                if (menuOpen && !nav.contains(e.target) && !menuBtn.contains(e.target)) {
+                    closeMenu();
                 }
             });
 
-            // 메뉴 버튼 클릭 시 메뉴가 열릴 때 배경 클릭을 무시하도록
-            $(".menu-btn").on("click", function (e) {
-                e.stopPropagation();  // 메뉴 버튼 클릭 이벤트가 문서로 전파되지 않도록 막기
-            });
+            Array.from(nav.getElementsByTagName("a")).forEach(link => {
+                link.addEventListener("click", closeMenu);
 
-
-
-
-            const $nav = $("#nav");
-
-            // 각 a 태그에 대해 mousemove 이벤트 설정
-            $nav.find("a").on("mousemove", function (e) {
-                const rect = this.getBoundingClientRect();
-                const $img = $(this).find("img");
-
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-
-                $img.css({
-                    left: `${x}px`,
-                    top: `${y}px`
+                // 마우스 이동 이미지
+                link.addEventListener("mousemove", e => {
+                    const rect = link.getBoundingClientRect();
+                    const img = link.querySelector("img");
+                    if (img) {
+                        img.style.left = `${e.clientX - rect.left}px`;
+                        img.style.top = `${e.clientY - rect.top}px`;
+                    }
                 });
             });
 
-            // 윈도우 전체 mousemove 이벤트
-            $(window).on("mousemove", function (e) {
+            // 메뉴 전체 Y축 부드럽게 이동
+            window.addEventListener("mousemove", e => {
+                if (!menuOpen) return;
                 const percent = e.clientY / window.innerHeight;
-
-                // nav 움직이기 (CSS 애니메이션 대신 jQuery animate 사용)
-                $nav.stop().animate(
-                    {
-                        // transform은 jQuery animate에서 직접 제어 불가 → CSS 변수나 jQuery css()로 처리
-                    },
-                    {
-                        duration: 4000,
-                        step: function () {
-                            const translateY = percent * $nav.outerHeight() * -1;
-                            $nav.css("transform", `translateY(${translateY}px)`);
-                        },
-                        queue: false
-                    }
-                );
+                const translateY = percent * nav.offsetHeight * -0.2;
+                gsap.to(nav, { y: translateY, duration: 1.2, ease: "power2.out" });
             });
+
 
 
             //메인비주얼
@@ -227,22 +229,6 @@
 
             // 스킬
 
-            const $root = $(':root');
-            const $marqueeContent = $('.section-02 ul.marquee-content');
-            const displayed = parseInt($root.css('--marquee-elements-displayed'));
-
-            // 요소 개수 설정
-            $root.css('--marquee-elements', $marqueeContent.children().length);
-
-            // 복제 작업을 한 번에 처리
-            const clones = $marqueeContent.children().slice(0, displayed).clone();
-
-            gsap.to(".marquee-content", {
-                x: "-50%",
-                ease: "linear",
-                duration: 20,
-                repeat: -1,
-            });
 
 
             //메인3
@@ -361,7 +347,7 @@
 <body>
     <div id="wrap">
 
-        <main class="main">
+        <main class="main" id="main_visual">
             <header class="header">
                 <button class="menu-btn">Menu</button>
                 <nav id="nav">
@@ -375,7 +361,7 @@
                     </a>
                     <a href="#section-03">
                         <span>PROJECT</span>
-                        <img src="img/" />
+                        <img src="img/nav3.png" />
                     </a>
                     <a href="#section-05">
                         <span>GRAPHIC DESIGN</span>
@@ -435,7 +421,7 @@
 
                 <div class="btn">
                     <a href="#section-03" class="btn-left">Project</a>
-                    <a href="#section-05" class="btn-right">Contact</a>
+                    <a href="#footer" class="btn-right">Contact</a>
                 </div><!-- .btn end -->
 
 
@@ -598,37 +584,43 @@
 
                 <!-- skill -->
 
-                <div class="marquee">
-                    <ul class="marquee-content">
 
-                        <li class="image"><img src="img/git.png" alt="jquery"></li>
-                        <li class="image"><img src="img/html5.png" alt="html5"></li>
-                        <li class="image"><img src="img/js.png" alt="js"></li>
-                        <li class="image"><img src="img/notion.png" alt="notion"></li>
-                        <li class="image"><img src="img/sass.png" alt="sass"></li>
+                <div class="textLoop">
+                    <ul class="a">
+                        <li><img src="img/git.png" alt="jquery"><em>git hub</em></li>
+                        <li><img src="img/html5.png" alt="html5"><em>html:5</em></li>
+                        <li><img src="img/js.png" alt="js"><em>JavaScript</em></li>
+                        <li><img src="img/sass.png" alt="sass"><em>sass</em></li>
 
-                        <li class="image"><img src="img/adobe.png" alt="adobe"></li>
-                        <li class="image"><img src="img/query.png" alt="jquery"></li>
-                        <li class="image"><img src="img/ai.png" alt="ai"></li>
-                        <li class="image"><img src="img/adobe.png" alt="adobe"></li>
-                        <li class="image"><img src="img/photo.png" alt="photo"></li>
-                        <li class="image"><img src="img/visual.png" alt="visual"></li>
-                        <li class="image"><img src="img/git.png" alt="jquery"></li>
-                        <li class="image"><img src="img/html5.png" alt="html5"></li>
-                        <li class="image"><img src="img/js.png" alt="js"></li>
-                        <li class="image"><img src="img/notion.png" alt="notion"></li>
-                        <li class="image"><img src="img/sass.png" alt="sass"></li>
+                        <li><img src="img/query.png" alt="jquery"><em>jquery</em></li>
+                        <li><img src="img/notion.png" alt="notion"><em>notion</em></li>
 
-                        <li class="image"><img src="img/adobe.png" alt="adobe"></li>
-                        <li class="image"><img src="img/query.png" alt="jquery"></li>
-                        <li class="image"><img src="img/ai.png" alt="ai"></li>
-                        <li class="image"><img src="img/adobe.png" alt="adobe"></li>
-                        <li class="image"><img src="img/photo.png" alt="photo"></li>
-                        <li class="image"><img src="img/visual.png" alt="visual"></li>
 
-                    </ul><!-- marquee-content -->
 
-                </div><!-- marquee -->
+
+
+
+
+                    </ul><!-- .a end -->
+                    <ul class="b">
+
+                        <li><img src="img/adobe.png" alt="adobe"><em>adode express</em></li>
+
+                        <li><img src="img/ai.png" alt="ai"><em>illustrator</em></li>
+                        <li><img src="img/photo.png" alt="photo"><em>Photoshop</em></li>
+                        <li><img src="img/visual.png" alt="visual"><em>visual</em></li>
+
+
+
+                        <li><img src="img/ai.png" alt="ai"><em>illustrator</em></li>
+
+
+                    </ul><!-- .a end -->
+                </div><!--textLoopend  -->
+
+
+
+
 
 
 
@@ -1107,7 +1099,7 @@
                                     </p>
                                     <figure class="card-figure">
                                         <img class="card-img"
-                                            src="https://arman-borkhani.github.io/codepen-cpc-css-shape/assets/calm.jpg"
+                                            src="img/"
                                             alt="포스터3" />
                                     </figure><!-- card-figure end -->
                                 </div><!-- card end -->
@@ -1198,7 +1190,32 @@
 
 
 
-        <footer class="footer">
+        <footer class="footer" id="footer">
+
+
+
+
+            <div class="utill">
+
+                <ul class="con">
+                    <li><a href="#">kakao</a></li>
+                    <li><a href="#">Mail</a></li>
+                    <li><a href="#">Phone</a></li>
+                </ul><!-- con -->
+
+                <div class="menu">
+                    <p>Go to Menu</p>
+                    <ul>
+                        <li><a href="#main_visual">main</a></li>
+                        <li><a href="#section-01">intro</a></li>
+                        <li><a href="#section-02">about</a></li>
+                        <li><a href="#section-04">project</a></li>
+                        <li><a href="#section-05">graphic design</a></li>
+                    </ul>
+                </div><!-- .menu end -->
+            </div><!-- utill end -->
+
+
             <div class="container">
                 <h3>contact me contact me contact me contact me contact me contact me contact me contact me
                     contact
@@ -1213,7 +1230,24 @@
                     contact
                     me contact me contact me contact me </h3>
 
+
             </div><!-- container -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <p>© 2025 김소원. All rights reserved.
+            </p>
+
         </footer><!-- footer end -->
 
     </div><!-- wrap end -->
