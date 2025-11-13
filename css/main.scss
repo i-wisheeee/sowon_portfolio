@@ -1239,7 +1239,15 @@ body {
             .box {
                 .title {
                     .color {
+
+                        .col {
+                            color: #000;
+                            font-weight: bold;
+                        }
+
                         li {
+
+
                             color: #f0c118;
                         }
                     }
@@ -1352,10 +1360,26 @@ body {
                         display: flex;
                         margin-bottom: 1rem;
 
+                        .col {
+                            color: #000;
+                            font-weight: bold;
+                        }
+
+                        li {
+                            color: #D4331A;
+                        }
+
 
                     }
                 }
             }
+
+            p {
+                em {
+                    color: #D4331A;
+                }
+            }
+
         }
     }
 
@@ -1369,15 +1393,17 @@ body {
                         p {
                             font-size: 1.8rem;
                             color: #000;
+                            font-weight: bold;
                         }
 
                         ul {
                             display: flex;
                             flex-wrap: wrap;
 
+
                             li {
                                 font-size: 2rem;
-                                color: #D4331A;
+                                color: #005BAC;
                             }
                         }
                     }
@@ -1386,7 +1412,7 @@ body {
 
             p {
                 em {
-                    color: #D4331Add;
+                    color: #005BAC;
                 }
 
             }
@@ -1410,7 +1436,15 @@ body {
             .box {
                 .title {
                     .color {
+
+                        p {
+                            color: #000;
+                            font-weight: bold;
+                        }
+
                         ul {
+
+
                             li {
                                 color: #006f3f;
                             }
@@ -1626,7 +1660,7 @@ body {
                 font-size: 1.5rem;
                 position: absolute;
                 top: -4rem;
-                z-index: 11;
+                z-index: 10;
                 left: 50%;
                 transform: translateX(-50%);
                 box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.1); // 2px 4px
@@ -1802,6 +1836,84 @@ body {
 
         }
 
+        .footnav {
+            width: 60rem;
+            margin: 0 auto;
+
+            border-radius: 2rem;
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+
+
+            .gnb {
+
+
+                >li {
+                    border-bottom: 0.05rem solid #000;
+
+
+                    a.depth-01 {
+                        height: 6rem;
+                        display: block;
+                        background-color: #f1de2c;
+                        border: 0.2rem solid #000000;
+
+                        -webkit-text-stroke: 0.1rem #313131;
+                        font-size: 2rem;
+                        line-height: 6rem;
+                        position: relative;
+
+                        color: #001b55;
+                        padding: 0 3rem;
+
+                        &::before {
+                            content: '▼';
+                            position: absolute;
+                            top: 0;
+                            right: 0.8rem;
+
+
+
+                        }
+
+                        &.active {
+                            background-color: #005BAC;
+                            color: #fff;
+
+
+
+
+                            &::before {
+                                transform: rotate(-90deg);
+
+                            }
+                        }
+
+                    }
+
+
+                    .depth-02 {
+                        display: none;
+
+                        li {
+                            text-align: center;
+                            color: black;
+                            background-color: #eeeeee;
+                            border-bottom: 0.1rem solid #0284c7;
+                            line-height: 6rem;
+
+                            transition: all 1s ease;
+
+                            a {
+                                display: block;
+                                padding: 2rem;
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
         .con {
             display: flex;
@@ -1830,7 +1942,7 @@ body {
 
             &:hover {}
 
-            :active {
+            &:active {
                 box-shadow: 0 0.2rem #181818;
                 transform: translateY(0.3rem);
                 color: rgb(4, 47, 126);
@@ -1881,7 +1993,7 @@ body {
 
 
 
-    p {
+    p.all {
         font-size: 1.4rem;
         text-align: center;
         padding: 2rem 0;

@@ -335,7 +335,28 @@
             });
 
 
+            //푸터아코디언메뉴
 
+            $('.footnav .depth-01').on('click', function (e) {
+                e.preventDefault();
+
+                const submenu = $(this).siblings('.depth-02');
+
+                if (submenu.is(':hidden')) {
+                    // 다른 메뉴 닫기
+                    $('.footnav .depth-02').slideUp();
+                    $('.footnav .depth-01').removeClass('active');
+
+                    // 선택한 메뉴 열기 + active 상태로 변경
+                    submenu.slideDown();
+                    $(this).addClass('active');
+                } else {
+                    // 다시 클릭 시 닫기 + active 해제
+                    submenu.slideUp();
+                    $(this).removeClass('active');
+                    
+                }
+            });
 
 
         });//script end
@@ -871,10 +892,11 @@
 
                             <em>📌 Click here </em>
                             <ul class="btn">
-                                <li><a href="https://i-wisheeee.github.io/KOMKA/"><span>Web site💻</span></a></li>
+                                <li><a href="https://i-wisheeee.github.io/KOMKA/" target="_blank"><span>Web
+                                            site💻</span></a></li>
 
-                                <li><a href="https://i-wisheeee.github.io/KOMKA/"><span>Git hub <img src="img/2git.png" alt="git"></span></a></li>
-                                <li><a href="img/한국음악저작권협회.pdf"><span>Process 📁</span></a></li>
+                                <li><a href=""><span>Git hub <img src="img/2git.png" alt="git"></span></a></li>
+                                <li><a href=""><span>Process 📁</span></a></li>
                                 <li><a href="#"><span>Figma <img src="img/2figma.png" alt="figma"></span></a></li>
                                 <li><a href="#"><span>Notion <img src="img/2notion.png" alt="notion"></span></a></li>
                             </ul><!-- btn end -->
@@ -1098,9 +1120,7 @@
                                         mindfully before diving into work.
                                     </p>
                                     <figure class="card-figure">
-                                        <img class="card-img"
-                                            src="img/"
-                                            alt="포스터3" />
+                                        <img class="card-img" src="img/" alt="포스터3" />
                                     </figure><!-- card-figure end -->
                                 </div><!-- card end -->
                             </div><!-- card-wrapper end -->
@@ -1203,6 +1223,38 @@
                     <li><a href="#">Phone</a></li>
                 </ul><!-- con -->
 
+
+
+                <div class="footnav">
+                    <ul class="gnb">
+                        <li>
+                            <a class="depth-01">Q. 이번 포트폴리오를 준비하면서 어떤 점이 가장어려웠나요?</a>
+                            <ul class="depth-02">
+                                <li>A. 디자인이라는 분야를 새로 접하다 보니 모든것이 낯설고 생소해서 4개월이라는 기간이
+                                    너무짧고 부족했던 것이 사실이었습니다.
+                                </li>
+                            </ul><!-- depth-02 end -->
+                        </li>
+                        <li>
+                            <a class="depth-01">질문1</a>
+                            <ul class="depth-02">
+                                <li>답변</li>
+                            </ul><!-- depth-02 end -->
+                        </li>
+                        <li>
+                            <a class="depth-01">질문1</a>
+                            <ul class="depth-02">
+                                <li>답변</li>
+                            </ul><!-- depth-02 end -->
+                        </li>
+                    </ul><!--.gnb end  -->
+                </div><!-- footnav end -->
+
+
+
+
+
+
                 <div class="menu">
                     <p>Go to Menu</p>
                     <ul>
@@ -1245,7 +1297,7 @@
 
 
 
-            <p>© 2025 김소원. All rights reserved.
+            <p class="all">© 2025 김소원. All rights reserved.
             </p>
 
         </footer><!-- footer end -->
