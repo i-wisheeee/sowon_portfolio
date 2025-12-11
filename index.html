@@ -28,6 +28,8 @@
         $(function () {
             AOS.init();
 
+
+
             const nav = document.getElementById("nav");
             const menuBtn = document.querySelector(".menu-btn");
             let menuOpen = false;
@@ -188,6 +190,23 @@
                 return ((value - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
             }
 
+            ///메인비주얼-스크롤텍스트
+
+            gsap.to(".textBox .mask .text", {
+                backgroundSize: "100% 100%",
+                opacity: 0, // 높이를 100%로 채움
+                ease: "none",
+                scrollTrigger: {
+                    trigger: ".textBox",
+                    start: "top 70%",
+                    end: "bottom 30%",
+                    scrub: 1,
+                    //markers: true // 디버그용
+                }
+            });
+
+
+
             //메인1
 
             // 카드 등장 애니메이션
@@ -333,23 +352,26 @@
             $('.footnav .depth-01').on('click', function (e) {
                 e.preventDefault();
 
+                const $footnav = $(this).closest('.footnav');
                 const submenu = $(this).siblings('.depth-02');
 
                 if (submenu.is(':hidden')) {
-                    // 다른 메뉴 닫기
-                    $('.footnav .depth-02').slideUp();
-                    $('.footnav .depth-01').removeClass('active');
+                    // 현재 footnav 내에서만 다른 메뉴 닫기
+                    $footnav.find('.depth-02').slideUp();
+                    $footnav.find('.depth-01').removeClass('active');
 
-                    // 선택한 메뉴 열기 + active 상태로 변경
+                    // 클릭한 메뉴 열기
                     submenu.slideDown();
                     $(this).addClass('active');
                 } else {
-                    // 다시 클릭 시 닫기 + active 해제
+                    // 다시 클릭 시 닫기
                     submenu.slideUp();
                     $(this).removeClass('active');
-
                 }
             });
+
+
+
 
 
         });//script end
@@ -395,6 +417,20 @@
 
             <section class="main_visual">
                 <div class="inner">
+                    <div class="textBox">
+                        <span class="mask">
+                            <span class="text">
+
+                                𓆇 ₊ 𓂃 ⊹Connecting<br />
+
+                                The<br />
+                                Dots<br />
+                                . ˚⁎ ◌ ｡ﾟ⊹ <br />
+                            </span><!-- .text end -->
+                        </span><!-- .mask end -->
+                    </div><!-- .textBox end -->
+
+
 
                     <div class="emo shad" data-x='10vw' data-y='50vh' data-rotate='-40' data-bound='40' data-z='50'>
                         <img src="img/main_1.png" alt="메인">
@@ -443,9 +479,9 @@
 
                 <div class="info-wrap">
                     <div class="info-cont">
-                        <h1>Connecting</h1>
+                        <h1>Web</h1>
                         <br>
-                        <h1>the Dots</h1>
+                        <h1>Portfolio</h1>
                         <br>
                         <br>
                         <div class="shad">
@@ -839,7 +875,7 @@
                         <div class="text">
                             <div class="box">
                                 <div class="title">
-                                    <h2>한국저작권<br />음악 협회</h2>
+                                    <h2>한국음악<br />저작권협회</h2>
 
 
                                     <ul class="color">
@@ -1218,8 +1254,8 @@
                         <li>
                             <a class="depth-01">Q. 이번 포트폴리오를 준비하면서 어떤 점이 가장어려웠나요?</a>
                             <ul class="depth-02">
-                                <li>A. 디자인이라는 분야를 새로 접하다 보니 모든것이 낯설고 생소해서 4개월이라는 기간이
-                                    너무짧고 부족했던 것이 사실이었습니다.
+                                <li><em>A.</em> 디자인이라는 분야를 새로 접하다 보니 모든것이 낯설고 생소해서 4개월이라는 기간이
+                                    너무짧고 부족했던 것이 사실이었습니다. 그래서 컨셉에맞는 스크립트를 연구하고 결과값을 도출해내는것에 한계가 있었고 라이브러리들을 수집하는데에 있어서 시간들을 많이 소모하기도하고 결국엔 또 새롭게 포트폴리오를 재정비하게 되면서 체력소모에 큰 지장을 겪기도 했지만 실패를 경험하면서 도출해 냈던 과정속에서 결국엔 더 많은 지식을 쌓는데에 도움이되었다고 생각합니다.
                                 </li>
                             </ul><!-- depth-02 end -->
                         </li>
